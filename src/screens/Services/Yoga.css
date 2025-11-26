@@ -1,0 +1,267 @@
+.yoga-wrapper {
+  max-width: 550px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.y-title {
+  font-size: clamp(18px, 4vw, 22px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.y-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.y-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
+
+.y-name {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.y-special {
+  text-align: center;
+  color: #666;
+  margin-bottom: 10px;
+  font-size: clamp(12px, 2.4vw, 14px);
+}
+
+.y-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.y-time-btn {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.y-time-btn.active {
+  background: #439BAE;
+  color: white;
+  border-color: #439BAE;
+}
+
+.y-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.y-next {
+  width: 100%;
+  background: #F29100;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.y-next:hover {
+  background: #d67800;
+}
+
+/* Step 2 */
+.y-plan {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.y-plan.selected {
+  border-color: #439BAE;
+  background: #E8F5FF;
+}
+
+.y-price {
+  font-weight: bold;
+}
+
+.y-sub {
+  color: #666;
+  font-size: 14px;
+}
+
+.y-days-label {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.y-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.y-day-btn {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.y-day-btn.active {
+  background: #439BAE;
+  color: white;
+  border-color: #439BAE;
+}
+
+.y-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.y-error {
+  color: red;
+  font-size: 14px;
+  margin-top: -5px;
+}
+
+/* Summary */
+.y-summary {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Submit Button */
+.y-submit {
+  width: 100%;
+  background: #439BAE;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.y-submit:hover {
+  background: #357a8c;
+}
+
+/* Responsive Breakpoints */
+
+/* Tablets and smaller */
+@media (max-width: 768px) {
+  .yoga-wrapper {
+    max-width: 100%;
+    padding: 15px 12px;
+  }
+
+  .y-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .y-title {
+    font-size: 20px;
+  }
+
+  .y-name {
+    font-size: 16px;
+  }
+
+  .y-special {
+    font-size: 13px;
+  }
+
+  .y-time-btn,
+  .y-day-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .y-next,
+  .y-submit {
+    font-size: 15px;
+    padding: 11px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .yoga-wrapper {
+    padding: 10px 8px;
+  }
+
+  .y-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .y-title {
+    font-size: 18px;
+  }
+
+  .y-name {
+    font-size: 15px;
+  }
+
+  .y-special {
+    font-size: 12px;
+  }
+
+  .y-time-btn,
+  .y-day-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .y-next,
+  .y-submit {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

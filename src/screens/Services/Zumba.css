@@ -1,0 +1,261 @@
+.zum-wrapper {
+  max-width: 550px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Title */
+.zum-title {
+  font-size: clamp(18px, 4vw, 22px);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Trainer Card */
+.zum-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+/* Image */
+.zum-img {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Name */
+.zum-name {
+  font-size: clamp(16px, 3vw, 19px);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Specialty */
+.zum-special {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Time Buttons */
+.zum-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.zum-time-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.zum-time-btn.active {
+  background: #439BAE;
+  color: white;
+  border-color: #439BAE;
+}
+
+/* Inputs */
+.zum-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Next Button */
+.zum-next {
+  width: 100%;
+  padding: 14px;
+  background: #F29100;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.zum-next:hover {
+  background: #d67800;
+}
+
+/* Plans */
+.zum-plan {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.zum-plan.selected {
+  border-color: #F29100;
+  background: #FFF3E0;
+}
+
+/* Price & Subtitle */
+.zum-price {
+  font-weight: bold;
+}
+
+.zum-sub {
+  color: gray;
+  font-size: 14px;
+}
+
+/* Days */
+.zum-days-label {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.zum-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.zum-day-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.zum-day-btn.active {
+  background: #439BAE;
+  color: white;
+  border-color: #439BAE;
+}
+
+/* Notes */
+.zum-textarea {
+  width: 100%;
+  padding: 12px;
+  height: 110px;
+  margin-top: 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Errors */
+.zum-error {
+  color: red;
+  font-size: 14px;
+  margin-top: -5px;
+}
+
+/* Summary */
+.zum-summary {
+  background: white;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* Submit */
+.zum-submit {
+  width: 100%;
+  padding: 14px;
+  background: #439BAE;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.zum-submit:hover {
+  background: #357a8c;
+}
+
+/* Responsive */
+
+/* Tablets and smaller */
+@media (max-width: 768px) {
+  .zum-wrapper {
+    max-width: 100%;
+    padding: 15px 12px;
+  }
+  .zum-img {
+    height: 160px;
+  }
+  .zum-title {
+    font-size: 20px;
+  }
+  .zum-name {
+    font-size: 16px;
+  }
+  .zum-special {
+    font-size: 13px;
+  }
+  .zum-time-btn,
+  .zum-day-btn {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+  .zum-next,
+  .zum-submit {
+    font-size: 15px;
+    padding: 13px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .zum-wrapper {
+    padding: 10px 8px;
+  }
+  .zum-img {
+    height: 140px;
+  }
+  .zum-title {
+    font-size: 18px;
+  }
+  .zum-name {
+    font-size: 15px;
+  }
+  .zum-special {
+    font-size: 12px;
+  }
+  .zum-time-btn,
+  .zum-day-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .zum-next,
+  .zum-submit {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

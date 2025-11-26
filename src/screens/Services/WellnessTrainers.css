@@ -1,0 +1,419 @@
+.wt-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.wt-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* HERO SECTION */
+.wt-hero-section {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.wt-badge {
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: clamp(12px, 1.2vw, 14px);
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.wt-main-title {
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 800;
+  color: #1d1d1b;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.wt-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #555;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Benefits Grid */
+.wt-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.wt-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.wt-benefit-icon {
+  font-size: 24px;
+  background: #f0f9ff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wt-benefit-item h3 {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+  color: #1d1d1b;
+}
+
+.wt-benefit-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.wt-hero-img {
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto 0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+/* PROGRAMS SECTION */
+.wt-programs-section {
+  margin-bottom: 60px;
+}
+
+.wt-section-title {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 700;
+  color: #1d1d1b;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.wt-section-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: clamp(14px, 2vw, 16px);
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wt-program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.wt-program-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+}
+
+.wt-program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.wt-pill {
+  height: 6px;
+  width: 60px;
+  border-radius: 999px;
+  margin: 0 auto 20px;
+}
+
+.wt-program-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.wt-program-title {
+  font-size: clamp(18px, 2.8vw, 22px);
+  font-weight: 700;
+  color: #1d1d1b;
+  margin: 0 0 12px 0;
+}
+
+.wt-program-desc {
+  font-size: clamp(13px, 2vw, 15px);
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+}
+
+.wt-cta {
+  display: inline-flex;
+  align-items: center;
+  background: #1d1d1b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-top: auto;
+}
+
+.wt-program-card:hover .wt-cta {
+  opacity: 0.9;
+  transform: translateX(4px);
+}
+
+.wt-cta-arrow {
+  margin-left: 6px;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.wt-program-card:hover .wt-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* BOTTOM SECTION */
+.wt-bottom-section {
+  padding: 60px 0;
+  background: white;
+}
+
+.wt-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wt-bottom-title {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  color: #1d1d1b;
+  margin-bottom: 16px;
+}
+
+.wt-bottom-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #555;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Features Grid */
+.wt-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.wt-feature-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.wt-feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.wt-feature-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.wt-feature-card h3 {
+  font-size: 20px;
+  margin: 0 0 12px 0;
+  color: #1d1d1b;
+}
+
+.wt-feature-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Testimonials */
+.wt-testimonials h3 {
+  font-size: clamp(22px, 3.5vw, 28px);
+  margin-bottom: 30px;
+  color: #1d1d1b;
+}
+
+.wt-testimonial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.wt-testimonial-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.wt-rating {
+  color: #ffc107;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.wt-testimonial-card p {
+  font-style: italic;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.wt-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wt-author-name {
+  font-weight: 600;
+  color: #1d1d1b;
+}
+
+.wt-author-role {
+  font-size: 13px;
+  color: #777;
+}
+
+/* FAQ */
+.wt-faq-section h3 {
+  font-size: clamp(22px, 3.5vw, 28px);
+  margin-bottom: 30px;
+  color: #1d1d1b;
+}
+
+.wt-faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wt-faq-item {
+  text-align: left;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.wt-faq-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.wt-faq-item h4 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: #1d1d1b;
+}
+
+.wt-faq-item p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .wt-main-title {
+    font-size: 36px;
+  }
+  .wt-hero-img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wt-wrapper {
+    padding: 20px;
+  }
+  .wt-main-title {
+    font-size: 30px;
+  }
+  .wt-section-title {
+    font-size: 28px;
+  }
+  .wt-bottom-title {
+    font-size: 30px;
+  }
+  .wt-benefit-item {
+    max-width: 100%;
+  }
+  .wt-program-card {
+    min-height: auto;
+    padding: 24px;
+  }
+  .wt-program-title {
+    font-size: 20px;
+  }
+  .wt-cta {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wt-main-title {
+    font-size: 26px;
+  }
+  .wt-subtitle,
+  .wt-section-subtitle,
+  .wt-bottom-subtitle {
+    font-size: 15px;
+  }
+  .wt-benefits-grid,
+  .wt-program-grid,
+  .wt-features-grid,
+  .wt-testimonial-cards {
+    grid-template-columns: 1fr;
+  }
+  .wt-program-desc {
+    font-size: 14px;
+  }
+}

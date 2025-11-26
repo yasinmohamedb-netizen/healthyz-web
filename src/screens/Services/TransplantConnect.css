@@ -1,0 +1,499 @@
+.tc-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.tc-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* TOP SECTION */
+.tc-top-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* LEFT CONTENT */
+.tc-left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tc-badge {
+  background: #e7f7fa;
+  color: #0a4a5a;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.tc-main-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #1d1d1b;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.tc-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Benefits */
+.tc-benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.tc-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.tc-benefit-icon {
+  font-size: 24px;
+  background: #f0f9ff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tc-benefit-item h3 {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+  color: #1d1d1b;
+}
+
+.tc-benefit-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Hero Image */
+.tc-hero-img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* RIGHT FORM */
+.tc-right-form {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.tc-form-header h2 {
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 700;
+  color: #1d1d1b;
+  margin-bottom: 8px;
+}
+
+.tc-form-header p {
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.tc-form-group {
+  margin-bottom: 20px;
+}
+
+.tc-form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 15px;
+}
+
+.tc-form-input,
+.tc-form-textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border 0.2s, background 0.2s;
+  background: #fafafa;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.tc-form-input.filled,
+.tc-form-textarea.filled {
+  background: white;
+  border-color: #0a4a5a;
+}
+
+.tc-form-input:focus,
+.tc-form-textarea:focus {
+  outline: none;
+  border-color: #0a4a5a;
+}
+
+.tc-error-text {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.tc-form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Organ Chips */
+.tc-service-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.tc-service-chip {
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.tc-service-chip.active {
+  background: #0a4a5a;
+  color: white;
+  border-color: #0a4a5a;
+}
+
+/* BUTTONS */
+.tc-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.tc-btn-primary {
+  background: #0a4a5a;
+  color: white;
+}
+
+.tc-btn-primary:hover:not(:disabled) {
+  background: #083a47;
+}
+
+.tc-btn-lg {
+  padding: 14px 28px;
+  font-size: 18px;
+}
+
+.tc-pay-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tc-pay-arrow {
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.tc-pay-btn:hover .tc-pay-arrow {
+  transform: translateX(4px);
+}
+
+.tc-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tc-loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* BOTTOM SECTION */
+.tc-bottom-section {
+  padding: 60px 0;
+  background: white;
+}
+
+.tc-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tc-bottom-title {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  color: #1d1d1b;
+  margin-bottom: 16px;
+}
+
+.tc-bottom-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: #555;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Features Grid */
+.tc-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.tc-feature-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.tc-feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.tc-feature-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.tc-feature-card h3 {
+  font-size: 20px;
+  margin: 0 0 12px 0;
+  color: #1d1d1b;
+}
+
+.tc-feature-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Testimonials */
+.tc-testimonials h3 {
+  font-size: clamp(22px, 3.5vw, 28px);
+  margin-bottom: 30px;
+  color: #1d1d1b;
+}
+
+.tc-testimonial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.tc-testimonial-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.tc-rating {
+  color: #ffc107;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.tc-testimonial-card p {
+  font-style: italic;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.tc-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tc-author-name {
+  font-weight: 600;
+  color: #1d1d1b;
+}
+
+.tc-author-role {
+  font-size: 13px;
+  color: #777;
+}
+
+/* FAQ */
+.tc-faq-section h3 {
+  font-size: clamp(22px, 3.5vw, 28px);
+  margin-bottom: 30px;
+  color: #1d1d1b;
+}
+
+.tc-faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tc-faq-item {
+  text-align: left;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.tc-faq-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.tc-faq-item h4 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: #1d1d1b;
+}
+
+.tc-faq-item p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .tc-top-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .tc-main-title {
+    font-size: 36px;
+  }
+
+  .tc-benefits {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .tc-wrapper {
+    padding: 20px;
+  }
+
+  .tc-main-title {
+    font-size: 32px;
+  }
+
+  .tc-bottom-title {
+    font-size: 28px;
+  }
+
+  .tc-form-header h2 {
+    font-size: 22px;
+  }
+}
+
+/* Thank You Modal Overlay */
+.tc-modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.44);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tc-modal-content {
+  background: #fff;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  min-width: 300px;
+  max-width: 95vw;
+  box-sizing: border-box;
+}
+
+.tc-success-heading {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.tc-success-msg strong {
+  font-weight: 600;
+  color: #007A3D;
+}
+
+.tc-auto-refresh {
+  color: #888;
+  margin-top: 18px;
+  font-size: 1rem;
+  text-align: center;
+}

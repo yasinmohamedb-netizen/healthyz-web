@@ -1,0 +1,114 @@
+.floating-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .dir-horizontal .carousel-track {
+    flex-wrap: nowrap;
+  }
+  
+  .dir-vertical .carousel-track {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    flex: 0 0 auto;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+  }
+  
+  .carousel-nav:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .dir-vertical .carousel-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    top: auto;
+  }
+  
+  .dir-vertical .prev {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .dir-vertical .next {
+    bottom: -10px;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .dot.active {
+    background: #3b82f6;
+    transform: scale(1.2);
+  }
+  
+  .glide .carousel-slide {
+    opacity: 0.5;
+    transform: scale(0.95);
+    transition: all 0.4s ease;
+  }
+  
+  .glide .carousel-slide:first-child {
+    opacity: 1;
+    transform: scale(1);
+  }

@@ -1,0 +1,292 @@
+/* MAIN CONTAINER */
+.profile-container {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: auto;
+  background: #f5f7fa;
+}
+
+/* ---------- LEFT SECTION ---------- */
+.left-section {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0px 4px 18px rgba(0,0,0,0.1);
+}
+
+.left-quote {
+  font-size: 28px;
+  font-weight: 600;
+  color: #0f4c5c;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* ---------- RIGHT SECTION ---------- */
+.right-section {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* HEADER */
+.profile-header {
+  background: #439bae;
+  padding: 25px;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  background: white;
+  color: #439bae;
+  border-radius: 50%;
+  font-size: 26px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profile-email {
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+/* SECTIONS */
+.profile-section {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+}
+
+/* SECTION HEADER */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  font-size: 13px;
+  color: #439bae;
+  text-decoration: none;
+}
+
+/* INFO ROW */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+/* ADDRESS */
+.address-box {
+  background: #ecfdf5;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #4ade80;
+}
+
+/* WHATSAPP */
+.whatsapp-btn {
+  width: 100%;
+  background: #22c55e;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* PARTNER */
+.partner-box {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn {
+  padding: 14px;
+  border-radius: 12px;
+  background: #439bae;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* ACCOUNT OPTIONS */
+.options-box {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.logout-btn {
+  background: #f97316;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+}
+
+.delete-btn {
+  background: #ef4444;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+}
+
+.privacy-btn {
+  background: #439bae;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+/* ACTIVITY LIST */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-item {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  text-decoration: none;
+  color: #0f4c5c;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+.activity-item:hover {
+  background: #e0f2fe;
+  border-color: #38bdf8;
+}
+
+/* --------------------------------------------- */
+/*                RESPONSIVE RULES               */
+/* --------------------------------------------- */
+
+/* Medium screens (Tablets) */
+@media (max-width: 1100px) {
+  .profile-container {
+    padding: 30px;
+    gap: 30px;
+  }
+  .left-quote {
+    font-size: 24px;
+  }
+}
+
+/* Small tablets + large mobile */
+@media (max-width: 900px) {
+  .profile-container {
+    flex-direction: column;
+    padding: 24px;
+    gap: 30px;
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%;
+  }
+
+  .left-image {
+    height: 260px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 18px;
+    gap: 20px;
+  }
+
+  .left-image {
+    height: 220px;
+    border-radius: 14px;
+  }
+
+  .left-quote {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .profile-header {
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .profile-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 22px;
+  }
+
+  .profile-name {
+    font-size: 18px;
+  }
+
+  .profile-section,
+  .options-box,
+  .partner-box {
+    padding: 16px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .whatsapp-btn,
+  .logout-btn,
+  .delete-btn,
+  .toggle-btn {
+    width: 100%;
+  }
+}
