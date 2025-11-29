@@ -33,7 +33,9 @@ import OrdersScreen from "./screens/OrdersScreen";
 
 // STATIC PAGES
 import TermsAndConditions from "./screens/TermsAndConditions";
-import PrivacyPolicyPage from "./screens/auth/PrivacyPolicyPage";   // ⭐ NEW
+import PrivacyPolicyPage from "./screens/auth/PrivacyPolicyPage";
+import RefundPolicyPage from "./screens/auth/RefundPolicyPage";          // ⭐ NEW
+import ShippingPolicyPage from "./screens/auth/ShippingPolicyPage";      // ⭐ NEW
 
 // SERVICES
 import HomeCareServicesScreen from "./screens/Services/HomeCareServicesScreen";
@@ -53,7 +55,7 @@ import MedicineProductsScreen from "./screens/products/MedicineProductsScreen";
 import SexualProducts from "./screens/products/SexualProducts";
 import SurgicalProducts from "./screens/products/SurgicalProducts";
 
-// PRODUCT DETAILS
+// PRODUCT DETAILS + CART
 import ProductDetail from "./screens/products/ProductDetail";
 import CartScreen from "./screens/products/CartScreen";
 import CheckoutScreen from "./screens/products/CheckoutScreen";
@@ -91,8 +93,12 @@ function AppRoutes({ user }) {
 
       {/* AUTH */}
       <Route path="/login" element={<Login />} />
+
+      {/* STATIC POLICY PAGES */}
       <Route path="/terms" element={<TermsAndConditions />} />
-      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} /> {/* ⭐ NEW */}
+      <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      <Route path="/refund-policy" element={<RefundPolicyPage />} />          {/* ⭐ NEW */}
+      <Route path="/shipping-policy" element={<ShippingPolicyPage />} />      {/* ⭐ NEW */}
 
       {/* HOME */}
       <Route path="/" element={<Home />} />
@@ -137,7 +143,7 @@ function AppRoutes({ user }) {
       <Route path="/address" element={<RequireAuth user={user}><AddressEditScreen /></RequireAuth>} />
 
       {/* CONTACT */}
-      <Route path="/contact" element={<ContactUs />} /> {/* ⭐ Help & Support leads here */}
+      <Route path="/contact" element={<ContactUs />} />
 
       {/* ORDER CANCEL POLICY */}
       <Route path="/cancel-order" element={<RequireAuth user={user}><ActionPolicy /></RequireAuth>} />
@@ -145,7 +151,7 @@ function AppRoutes({ user }) {
       {/* CHECKOUT */}
       <Route path="/checkout" element={<RequireAuth user={user}><CheckoutScreen /></RequireAuth>} />
 
-      {/* DEFAULT */}
+      {/* DEFAULT FALLBACK */}
       <Route path="*" element={<Home />} />
 
     </Routes>

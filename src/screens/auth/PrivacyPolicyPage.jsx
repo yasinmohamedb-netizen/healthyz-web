@@ -23,10 +23,27 @@ export default function PrivacyPolicyPage() {
 
       <p style={{ marginTop: "10px" }}>
         Contact:{" "}
-        <a href="mailto:hello@healthyz.co">
-          hello@healthyz.co
+        <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>
+      </p>
+
+      {/* --------------------------- */}
+      {/*   LINKS TO OTHER POLICIES  */}
+      {/* --------------------------- */}
+
+      <p style={{ marginTop: "20px" }}>
+        <strong>Related Policies:</strong><br />
+        <a href="/refund-policy" style={{ color: "#439BAE" }}>
+          Cancellation & Refund Policy
+        </a>
+        <br />
+        <a href="/shipping-policy" style={{ color: "#439BAE" }}>
+          Shipping & Delivery Policy
         </a>
       </p>
+
+      {/* --------------------------- */}
+      {/*      PRIVACY POLICY TEXT    */}
+      {/* --------------------------- */}
 
       <p style={{ marginTop: "20px" }}>
         Your privacy is important to us. This Privacy Policy explains how
@@ -43,14 +60,13 @@ export default function PrivacyPolicyPage() {
           third-party gateways).
         </li>
         <li>
-          <strong>Health & Service Data:</strong> Consultation history,
-          homecare bookings, wellness sessions, trainer appointments, and product
-          orders.
+          <strong>Health & Service Data:</strong> Consultation history, homecare
+          bookings, wellness sessions, trainer appointments, and product orders.
         </li>
         <li>
           <strong>Device & Usage Data:</strong> Device model, OS version, app
-          version, usage analytics, crash data, and Advertising ID (if used for
-          analytics only).
+          version, usage analytics, crash data, and Advertising ID (analytics
+          only).
         </li>
         <li>
           <strong>Location Data (Optional):</strong> Approximate or permitted
@@ -68,7 +84,7 @@ export default function PrivacyPolicyPage() {
         <li>To process bookings, consultations, and product orders</li>
         <li>To send service updates, alerts, and notifications</li>
         <li>To analyze app performance and improve user experience</li>
-        <li>To ensure account security and prevent fraudulent activity</li>
+        <li>To ensure account security and prevent fraud</li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>3. Sharing of Information</h2>
@@ -78,12 +94,11 @@ export default function PrivacyPolicyPage() {
       </p>
       <ul>
         <li>
-          <strong>Trusted third-party providers</strong> such as Firebase,
-          Twilio, Razorpay, cloud hosting, and analytics tools.
+          <strong>Trusted third-party providers:</strong> Firebase, Twilio,
+          Razorpay, cloud hosting, analytics tools.
         </li>
         <li>
-          <strong>Legal authorities</strong> if required for compliance or
-          security.
+          <strong>Legal authorities</strong> for compliance or security.
         </li>
       </ul>
 
@@ -94,60 +109,51 @@ export default function PrivacyPolicyPage() {
           performance measurement.
         </li>
         <li>
-          If any SDKs access Advertising ID, it is used{" "}
-          <strong>only for analytics</strong> and not for personalized ads.
+          Any Advertising ID (if accessed) is used only for analytics and not
+          personalized ads.
         </li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>5. Data Security</h2>
       <p>
-        We use industry-standard security practices including encryption,
-        secure servers, authentication controls, and restricted access to
-        safeguard your information.
+        We use industry-standard practices including encryption, secure servers,
+        authentication controls, and restricted access.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>6. User Rights</h2>
-      <p>You have the right to:</p>
       <ul>
-        <li>Request access to your personal data</li>
-        <li>Update or correct your data</li>
-        <li>Request data deletion</li>
+        <li>Request access to your data</li>
+        <li>Edit or correct your data</li>
+        <li>Request deletion</li>
         <li>Opt-out of analytics tracking (if supported)</li>
       </ul>
       <p>
-        To request any of the above, email us at{" "}
-        <a href="mailto:hello@healthyz.co">
-          hello@healthyz.co
-        </a>
+        To request any of the above, email{" "}
+        <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>7. Data Retention</h2>
       <p>
-        We retain personal and service-related data as long as your account is
-        active. Upon account deletion, your data will be securely removed within
-        a reasonable time unless required by law for longer retention.
+        We retain personal and service-related data while your account is
+        active. After account deletion, data is removed unless required by law.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>8. Children’s Privacy</h2>
       <p>
-        HealthYz is intended for users <strong>18 years and older</strong>. We
-        do not knowingly collect personal information from individuals under 18.
+        HealthYz is for users <strong>18+</strong>. We do not knowingly collect
+        data from minors.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>9. Changes to This Policy</h2>
       <p>
-        We may update this Privacy Policy occasionally. The “Last Updated” date
-        will reflect the new version. Please review periodically for changes.
+        Updates may be made periodically. The updated date at the top reflects
+        new versions.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>10. Contact Us</h2>
       <p>
-        If you have any questions about this Privacy Policy or your data, please
-        reach out to us at{" "}
-        <a href="mailto:hello@healthyz.co">
-          hello@healthyz.co
-        </a>
-        .
+        For any questions, contact{" "}
+        <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>.
       </p>
 
       {/* ------------------------------------------------------ */}
@@ -159,84 +165,64 @@ export default function PrivacyPolicyPage() {
       <p>
         At <strong>HealthYz</strong>, we aim to provide a seamless and reliable
         experience across consultations, homecare services, and product orders.
-        Our refund policy is designed to be fair, transparent, and aligned with
-        industry standards.
+        Our refund policy is designed to be fair and transparent.
       </p>
 
       <h3 style={{ marginTop: "20px" }}>11.1 Consultation Refunds</h3>
       <ul>
         <li>
-          Refunds are provided only if the consultation{" "}
-          <strong>did not take place</strong> due to:
+          Refunds only if consultation <strong>did not take place</strong> due
+          to:
           <ul>
             <li>Doctor unavailability</li>
             <li>Technical issues from our side</li>
             <li>Incorrect booking charged by error</li>
           </ul>
         </li>
-        <li>No refund is issued once the consultation has been completed.</li>
-        <li>
-          Refunds (if approved) are typically processed within{" "}
-          <strong>5–7 business days</strong>.
-        </li>
+        <li>No refund after consultation is completed.</li>
+        <li>Refunds processed within 5–7 business days.</li>
       </ul>
 
       <h3 style={{ marginTop: "20px" }}>11.2 Home Care Service Refunds</h3>
       <ul>
         <li>
-          The initial visit fee (e.g., ₹500) is refundable only if a caregiver was{" "}
+          Initial visit fee refundable only if caregiver was{" "}
           <strong>not assigned</strong> or did not visit.
         </li>
-        <li>
-          If the visit is completed, no refund is provided for the service fee.
-        </li>
-        <li>
-          Service cancellations should be requested at least{" "}
-          <strong>4 hours before</strong> the scheduled visit wherever possible.
-        </li>
+        <li>No refund after service completion.</li>
+        <li>Cancellation at least 4 hours before scheduled time.</li>
       </ul>
 
       <h3 style={{ marginTop: "20px" }}>11.3 Product Order Refunds</h3>
       <ul>
+        <li>Applicable only for:</li>
+        <ul>
+          <li>Wrong or damaged items</li>
+          <li>Expired or defective products</li>
+          <li>Paid orders not delivered</li>
+        </ul>
         <li>
-          Refunds are applicable only for:
-          <ul>
-            <li>Wrong or damaged items received</li>
-            <li>Expired or defective products</li>
-            <li>Orders that were paid for but not delivered</li>
-          </ul>
+          Products must be returned unused, unopened, and in original packaging
+          unless defective.
         </li>
         <li>
-          Products must generally be returned{" "}
-          <strong>unused, unopened, and in original packaging</strong>, unless
-          the issue is related to damage or expiry.
-        </li>
-        <li>
-          Due to hygiene and safety reasons,{" "}
-          <strong>certain health, wellness, and intimate products</strong> may
-          not be eligible for return once opened.
+          Due to hygiene reasons, intimate/sexual wellness products cannot be
+          returned once opened.
         </li>
       </ul>
 
       <h3 style={{ marginTop: "20px" }}>11.4 How to Request a Refund</h3>
       <p>
-        To request a refund or raise a concern about a transaction, please
-        contact us at{" "}
-        <a href="mailto:hello@healthyz.co">
-          hello@healthyz.co
-        </a>{" "}
-        with:
+        Email{" "}
+        <a href="mailto:hello@healthyz.co">hello@healthyz.co</a> with:
       </p>
       <ul>
-        <li>Your registered name and mobile number</li>
+        <li>Name & registered mobile number</li>
         <li>Order ID / Booking ID</li>
         <li>Date of transaction</li>
         <li>Reason for refund request</li>
       </ul>
-      <p>
-        Our support team will review your request and respond with the next
-        steps.
-      </p>
+      <p>Our support team will review and respond promptly.</p>
     </div>
   );
 }
