@@ -250,7 +250,7 @@ export default function VideoConsultation() {
   return (
     <div className="vc-container">
 
-      {/* 🔥 SEO at TOP of return */}
+      {/* 🔥 SEO at TOP */}
       <VideoConsultationSEO />
 
       {/* SUCCESS MODAL */}
@@ -283,7 +283,9 @@ export default function VideoConsultation() {
         <div className="vc-top-section">
 
           <div className="vc-left-content">
-            <div className="vc-badge">Trusted by 50,000+ Patients</div>
+
+            {/* BADGE REMOVED HERE */}
+
             <h1 className="vc-main-title">Expert Medical Care<br />From Home</h1>
             <p className="vc-subtitle">
               Connect instantly with certified doctors via secure video or audio consultation.
@@ -500,7 +502,7 @@ export default function VideoConsultation() {
         </div>
 
         {/* ============================= */}
-        {/* BOTTOM SECTION: Features + FAQ */}
+        {/* BOTTOM SECTION */}
         {/* ============================= */}
         <div className="vc-bottom-section">
           <div className="vc-bottom-container">

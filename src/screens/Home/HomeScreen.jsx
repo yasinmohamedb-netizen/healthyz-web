@@ -94,7 +94,7 @@ export default function HomeScreen() {
     },
   ];
 
-  // Departments list
+  // Departments
   const departments = [
     { id: "1", name: "Gynecology", color: "#F29100", icon: <MdFemale color="#F29100" size={20} /> },
     { id: "2", name: "Pediatrics", color: "#439BAE", icon: <MdChildCare color="#439BAE" size={20} /> },
@@ -108,7 +108,7 @@ export default function HomeScreen() {
     d.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // WHY CHOOSE DATA
+  // Static - Why Choose Us
   const whyChooseData = [
     { icon: "⚡", title: "Quick Connection", desc: "Get connected instantly — no long queues" },
     { icon: "🔒", title: "Secure & Private", desc: "Encrypted consultations with full privacy" },
@@ -144,8 +144,6 @@ export default function HomeScreen() {
 
   return (
     <div className="home-page">
-
-      {/* 🔥 SEO injected at top */}
       <HomeSEO />
 
       <main className="home-main">
@@ -155,7 +153,8 @@ export default function HomeScreen() {
         {/* ============================ */}
         <section className="hero-section">
           <div className="hero-content">
-            <span className="hero-badge badge">Trusted by 50,000+ Users</span>
+
+            {/* REMOVED BADGE COMPLETELY */}
 
             <h1 className="hero-title">
               Order Health & Wellness Products<br />From Home
@@ -179,7 +178,7 @@ export default function HomeScreen() {
         </section>
 
         {/* ============================ */}
-        {/* SEARCH */}
+        {/* SEARCH BAR */}
         {/* ============================ */}
         <div className="search-wrapper">
           <div className="search-container">
@@ -203,8 +202,6 @@ export default function HomeScreen() {
               key={i}
               className="main-service-card hover-lift"
               onClick={() => navigate(s.route)}
-              role="button"
-              tabIndex={0}
             >
               <div className="main-service-img-box" style={{ background: s.bg }}>
                 <img src={s.image} className="main-service-img" alt={s.title} />
@@ -314,7 +311,7 @@ export default function HomeScreen() {
         {/* ============================ */}
         <div className="new-layout-container">
 
-          {/* LEFT SIDE */}
+          {/* LEFT */}
           <div className="layout-left">
             <Section title="Top Services" />
 
@@ -336,7 +333,6 @@ export default function HomeScreen() {
                   ) : (
                     <div className="ts-fallback">
                       <h3>{s.title}</h3>
-                      {s.subtitle && <p>{s.subtitle}</p>}
                     </div>
                   )}
 
@@ -349,9 +345,10 @@ export default function HomeScreen() {
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT */}
           <div className="layout-right">
             <Section title="Health Tips" />
+
             <div className="tips-list">
               {healthTips.map((t) => (
                 <div key={t.id} className="tip-fb-card hover-lift">
@@ -424,7 +421,7 @@ export default function HomeScreen() {
               ))}
             </div>
 
-            {/* TESTIMONIALS */}
+            {/* Testimonials */}
             <div className="testimonials">
               <h3>What Our Patients Say</h3>
               <div className="testimonial-cards">
@@ -454,7 +451,7 @@ export default function HomeScreen() {
   );
 }
 
-// Reusable Section Component
+// Reusable Section
 function Section({ title, children }) {
   return (
     <div className="section">

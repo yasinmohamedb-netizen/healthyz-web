@@ -23,8 +23,8 @@ export default function PrivacyPolicyPage() {
 
       <p style={{ marginTop: "10px" }}>
         Contact:{" "}
-        <a href="mailto:zayzhealthcare@gmail.com">
-          zayzhealthcare@gmail.com
+        <a href="mailto:hello@healthyz.co">
+          hello@healthyz.co
         </a>
       </p>
 
@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
       <ul>
         <li>
           <strong>Trusted third-party providers</strong> such as Firebase,
-          Twilio, Razorpay/Stripe, cloud hosting, and analytics tools.
+          Twilio, Razorpay, cloud hosting, and analytics tools.
         </li>
         <li>
           <strong>Legal authorities</strong> if required for compliance or
@@ -94,8 +94,8 @@ export default function PrivacyPolicyPage() {
           performance measurement.
         </li>
         <li>
-          If any SDKs access Advertising ID, it is used **only for analytics**
-          — not for personalized ads.
+          If any SDKs access Advertising ID, it is used{" "}
+          <strong>only for analytics</strong> and not for personalized ads.
         </li>
       </ul>
 
@@ -116,8 +116,8 @@ export default function PrivacyPolicyPage() {
       </ul>
       <p>
         To request any of the above, email us at{" "}
-        <a href="mailto:zayzhealthcare@gmail.com">
-          zayzhealthcare@gmail.com
+        <a href="mailto:hello@healthyz.co">
+          hello@healthyz.co
         </a>
       </p>
 
@@ -144,10 +144,98 @@ export default function PrivacyPolicyPage() {
       <p>
         If you have any questions about this Privacy Policy or your data, please
         reach out to us at{" "}
-        <a href="mailto:zayzhealthcare@gmail.com">
-          zayzhealthcare@gmail.com
+        <a href="mailto:hello@healthyz.co">
+          hello@healthyz.co
         </a>
         .
+      </p>
+
+      {/* ------------------------------------------------------ */}
+      {/*                REFUND & CANCELLATION POLICY             */}
+      {/* ------------------------------------------------------ */}
+
+      <h2 style={{ marginTop: "40px" }}>11. Refund & Cancellation Policy</h2>
+
+      <p>
+        At <strong>HealthYz</strong>, we aim to provide a seamless and reliable
+        experience across consultations, homecare services, and product orders.
+        Our refund policy is designed to be fair, transparent, and aligned with
+        industry standards.
+      </p>
+
+      <h3 style={{ marginTop: "20px" }}>11.1 Consultation Refunds</h3>
+      <ul>
+        <li>
+          Refunds are provided only if the consultation{" "}
+          <strong>did not take place</strong> due to:
+          <ul>
+            <li>Doctor unavailability</li>
+            <li>Technical issues from our side</li>
+            <li>Incorrect booking charged by error</li>
+          </ul>
+        </li>
+        <li>No refund is issued once the consultation has been completed.</li>
+        <li>
+          Refunds (if approved) are typically processed within{" "}
+          <strong>5–7 business days</strong>.
+        </li>
+      </ul>
+
+      <h3 style={{ marginTop: "20px" }}>11.2 Home Care Service Refunds</h3>
+      <ul>
+        <li>
+          The initial visit fee (e.g., ₹500) is refundable only if a caregiver was{" "}
+          <strong>not assigned</strong> or did not visit.
+        </li>
+        <li>
+          If the visit is completed, no refund is provided for the service fee.
+        </li>
+        <li>
+          Service cancellations should be requested at least{" "}
+          <strong>4 hours before</strong> the scheduled visit wherever possible.
+        </li>
+      </ul>
+
+      <h3 style={{ marginTop: "20px" }}>11.3 Product Order Refunds</h3>
+      <ul>
+        <li>
+          Refunds are applicable only for:
+          <ul>
+            <li>Wrong or damaged items received</li>
+            <li>Expired or defective products</li>
+            <li>Orders that were paid for but not delivered</li>
+          </ul>
+        </li>
+        <li>
+          Products must generally be returned{" "}
+          <strong>unused, unopened, and in original packaging</strong>, unless
+          the issue is related to damage or expiry.
+        </li>
+        <li>
+          Due to hygiene and safety reasons,{" "}
+          <strong>certain health, wellness, and intimate products</strong> may
+          not be eligible for return once opened.
+        </li>
+      </ul>
+
+      <h3 style={{ marginTop: "20px" }}>11.4 How to Request a Refund</h3>
+      <p>
+        To request a refund or raise a concern about a transaction, please
+        contact us at{" "}
+        <a href="mailto:hello@healthyz.co">
+          hello@healthyz.co
+        </a>{" "}
+        with:
+      </p>
+      <ul>
+        <li>Your registered name and mobile number</li>
+        <li>Order ID / Booking ID</li>
+        <li>Date of transaction</li>
+        <li>Reason for refund request</li>
+      </ul>
+      <p>
+        Our support team will review your request and respond with the next
+        steps.
       </p>
     </div>
   );

@@ -114,7 +114,7 @@ export default function HomeCareServicesScreen() {
         key: orderData.razorpayKey,
         amount: orderData.amount,
         currency: "INR",
-      name: "Healthyz",
+        name: "Healthyz",
         description: "Initial Home Visit Fee",
         order_id: orderData.orderId,
 
@@ -177,7 +177,7 @@ export default function HomeCareServicesScreen() {
   return (
     <div className="hc-container">
       {/* ===================================== */}
-      {/* 🔥 SEO AT VERY TOP OF RETURN */}
+      {/* 🔥 SEO AT VERY TOP */}
       {/* ===================================== */}
       <HomecareSEO />
 
@@ -207,16 +207,19 @@ export default function HomeCareServicesScreen() {
       {/* MAIN WRAPPER */}
       <div className="hc-wrapper">
         {/* =============================== */}
-        {/* TOP SECTION (LEFT + FORM) */}
+        {/* TOP SECTION */}
         {/* =============================== */}
         <div className="hc-top-section">
 
-          {/* LEFT AREA */}
+          {/* LEFT SECTION */}
           <div className="hc-left-content">
-            <div className="hc-badge">Trusted by 10,000+ Families</div>
+
+            {/* REMOVED BADGE HERE */}
+
             <h1 className="hc-main-title">
               Premium Home Care <br />At Your Doorstep
             </h1>
+
             <p className="hc-subtitle">
               Professional caregivers, nurses, and attendants available 24/7.
             </p>
@@ -257,7 +260,7 @@ export default function HomeCareServicesScreen() {
           </div>
 
           {/* =============================== */}
-          {/* FORM SECTION */}
+          {/* RIGHT FORM */}
           {/* =============================== */}
           <div className="hc-right-form">
             <div className="hc-form-header">
@@ -399,7 +402,7 @@ export default function HomeCareServicesScreen() {
         </div>
 
         {/* =============================== */}
-        {/* BOTTOM SECTION (FEATURES, FAQ, TESTIMONIALS) */}
+        {/* BOTTOM SECTION */}
         {/* =============================== */}
         <div className="hc-bottom-section">
           <div className="hc-bottom-container">
@@ -494,8 +497,10 @@ export default function HomeCareServicesScreen() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );

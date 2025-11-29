@@ -129,7 +129,7 @@ export default function Footer() {
             {/* Keeping About empty since no About page exists */}
             <Link to="#" className="footer-item"></Link>
 
-            <Link to="/contact" className="footer-item">Contact</Link>
+            {/* <Link to="/contact" className="footer-item">Contact</Link> */}
             <Link to="/careers" className="footer-item">Careers</Link>
             <Link to="/contact" className="footer-item">Contact us for partnership</Link>
           </div>
