@@ -123,12 +123,12 @@ export default function Header() {
           </Link>
 
           <Link to="/explore" style={isActive("/explore")}>
-            Explore
+          HealthYz Store
           </Link>
 
-          <Link to="/profile" style={isActive("/profile")}>
+          {/* <Link to="/profile" style={isActive("/profile")}>
             Profile
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Desktop Login/Profile Button */}

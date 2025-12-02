@@ -1,5 +1,5 @@
 // ===============================================
-// ExploreScreen.jsx — FULL FINAL (SEO + UI FIX)
+// ExploreScreen.jsx — FULL FINAL (SEO + UI + FIXED ERRORS)
 // ===============================================
 
 import React, { useEffect, useState, useContext } from "react";
@@ -17,6 +17,19 @@ import ExploreSEO from "../../seo/ExploreSEO";
 
 const db = getFirestore(firebaseApp);
 
+// --------------------------------------------------
+// Reusable Section Component (FIXES THE ERROR)
+// --------------------------------------------------
+function Section({ title }) {
+  return (
+    <div className="explore-section-title-wrapper">
+      <h2 className="explore-section-title">{title}</h2>
+    </div>
+  );
+}
+
+// --------------------------------------------------
+
 export default function ExploreScreen() {
   const navigate = useNavigate();
   const { addToCart, cartItems } = useContext(CartContext);
@@ -33,10 +46,10 @@ export default function ExploreScreen() {
   const [category, setCategory] = useState("all");
 
   const categories = [
-    { id: "fitness", name: "Fitness" },
+    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/WellnessHome.png" },
     { id: "beauty", name: "Beauty" },
     { id: "sexual", name: "Sexual Wellness" },
-    { id: "baby", name: "Baby Care" },
+    { id: "babycare", name: "Baby Care" },
     { id: "medicines", name: "Medicines" },
     { id: "surgical", name: "Surgical" },
   ];
@@ -123,7 +136,7 @@ export default function ExploreScreen() {
           />
         </div>
 
-        {/* MAIN CONTENT AREA */}
+        {/* MAIN CONTENT */}
         <div className="explore-main">
           {/* HEADER */}
           <header className="section-header">
@@ -141,7 +154,7 @@ export default function ExploreScreen() {
             </button>
           </header>
 
-          {/* SEARCH BAR */}
+          {/* SEARCH */}
           <div className="search-section">
             <div className="search-bar">
               <span className="search-icon">🔍</span>
@@ -183,7 +196,33 @@ export default function ExploreScreen() {
             ))}
           </div>
 
-          {/* MOBILE FILTER AREA — VISIBLE ONLY ON MOBILE */}
+          {/* ============================== */}
+          {/*   SHOP BY CATEGORY SECTION     */}
+          {/* ============================== */}
+
+          <Section title="Shop By Category" />
+
+          <div className="explore-category-grid">
+            {categories.map((c) => (
+              <div
+                key={c.id}
+                className="explore-category-card hover-lift"
+                onClick={() => navigate(`/${c.id}`)}
+              >
+                <img
+                  src={
+                    c.image ||
+                    "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg"
+                  }
+                  alt={c.name}
+                  className="explore-category-img"
+                />
+                <p className="explore-category-name">{c.name}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* MOBILE FILTERS */}
           <div className="mobile-filter-area">
             <SidebarFilters
               categories={categories}
@@ -305,7 +344,6 @@ export default function ExploreScreen() {
             justify-content: center;
           }
 
-          /* MOBILE FILTER ONLY */
           .mobile-filter-area { display: none; }
 
           @media (max-width: 900px) {

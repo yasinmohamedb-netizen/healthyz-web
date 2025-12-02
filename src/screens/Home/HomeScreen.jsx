@@ -1,7 +1,6 @@
 // ================================================
-// src/screens/Home/HomeScreen.jsx (FINAL + SEO)
-// Fully Updated – Firebase Data + Departments +
-// Promotions + Why Choose HealthYz + Testimonials
+// src/screens/Home/HomeScreen.jsx (FINAL UPDATED)
+// E-Commerce Focus + Category Cards + Why Choose Us
 // ================================================
 
 import React, { useEffect, useState } from "react";
@@ -10,22 +9,13 @@ import { useNavigate } from "react-router-dom";
 import "./HomeScreen.css";
 import HomeSEO from "../../seo/HomeSEO";
 
-import {
-  MdFemale,
-  MdChildCare,
-  MdFavorite,
-  MdAccessibilityNew,
-  MdFaceRetouchingNatural,
-  MdPsychology,
-  MdSearch,
-} from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 
 const db = getFirestore();
 
 export default function HomeScreen() {
   const navigate = useNavigate();
 
-  const [featuredServices, setFeaturedServices] = useState([]);
   const [topServices, setTopServices] = useState([]);
   const [bestOffers, setBestOffers] = useState([]);
   const [healthTips, setHealthTips] = useState([]);
@@ -35,9 +25,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  // =============================
-  // FIREBASE FETCH FUNCTION
-  // =============================
+  // FIREBASE HELPER
   const fetchCol = async (col, setter) => {
     try {
       const snap = await getDocs(collection(db, col));
@@ -49,7 +37,6 @@ export default function HomeScreen() {
 
   useEffect(() => {
     Promise.all([
-      fetchCol("featuredServices", setFeaturedServices),
       fetchCol("topServices", setTopServices),
       fetchCol("bestOffers", setBestOffers),
       fetchCol("healthTips", setHealthTips),
@@ -66,13 +53,15 @@ export default function HomeScreen() {
       </div>
     );
 
-  // Main Services
+  // ------------------------------------
+  // MAIN SERVICES
+  // ------------------------------------
   const mainServices = [
     {
-      title: "Online Consultation",
-      image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/onlineconss.jpg",
-      bg: "#CFE4FF",
-      route: "/video-consultation",
+      title: "Wellness Hub",
+      image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg",
+      bg: "#F7E9FF",
+      route: "/wellness",
     },
     {
       title: "Homecare Services",
@@ -94,52 +83,30 @@ export default function HomeScreen() {
     },
   ];
 
-  // Departments
-  const departments = [
-    { id: "1", name: "Gynecology", color: "#F29100", icon: <MdFemale color="#F29100" size={20} /> },
-    { id: "2", name: "Pediatrics", color: "#439BAE", icon: <MdChildCare color="#439BAE" size={20} /> },
-    { id: "3", name: "Cardiology", color: "#FF4D4D", icon: <MdFavorite color="#FF4D4D" size={20} /> },
-    { id: "4", name: "Orthopedics", color: "#6C63FF", icon: <MdAccessibilityNew color="#6C63FF" size={20} /> },
-    { id: "5", name: "Dermatology", color: "#00A86B", icon: <MdFaceRetouchingNatural color="#00A86B" size={20} /> },
-    { id: "6", name: "Neurology", color: "#8A2BE2", icon: <MdPsychology color="#8A2BE2" size={20} /> },
+  // ------------------------------------
+  // E-COMMERCE CATEGORIES
+  // ------------------------------------
+  const categories = [
+    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "beauty", name: "Beauty", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "sexual", name: "Sexual Wellness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "babycare", name: "Baby Care", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
   ];
 
-  const filteredDepartments = departments.filter((d) =>
-    d.name.toLowerCase().includes(search.toLowerCase())
+  const filteredCategories = categories.filter((c) =>
+    c.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Static - Why Choose Us
+  // ------------------------------------
+  // WHY CHOOSE HEALTHYZ (NO IMAGES)
+  // ------------------------------------
   const whyChooseData = [
-    { icon: "⚡", title: "Quick Connection", desc: "Get connected instantly — no long queues" },
-    { icon: "🔒", title: "Secure & Private", desc: "Encrypted consultations with full privacy" },
-    { icon: "💊", title: "e-Prescriptions", desc: "Instant digital prescriptions" },
-    { icon: "⭐", title: "Top Specialists", desc: "Certified doctors from all specialties" },
-    { icon: "🏥", title: "Lab Test Coordination", desc: "Lab tests arranged at your doorstep" },
-    { icon: "❤️", title: "24/7 Support", desc: "Round-the-clock assistance" },
-  ];
-
-  const testimonials = [
-    {
-      name: "Priya S.",
-      role: "Verified Patient",
-      rating: "★★★★★",
-      text: "The dermatologist was amazing. Got consultation within 20 minutes.",
-      avatar: "PS",
-    },
-    {
-      name: "Rahul M.",
-      role: "Working Professional",
-      rating: "★★★★★",
-      text: "Great service after work hours. Zero waiting time.",
-      avatar: "RM",
-    },
-    {
-      name: "Anjali K.",
-      role: "Family Member",
-      rating: "★★★★★",
-      text: "Booked for my parents—very helpful and patient doctor.",
-      avatar: "AK",
-    },
+    { icon: "⚡", title: "Fast Delivery", desc: "Doorstep delivery for all products" },
+    { icon: "🔒", title: "Private & Secure", desc: "Your health data always stays private" },
+    { icon: "❤️", title: "Trusted Products", desc: "Handpicked & verified essentials" },
+    { icon: "💰", title: "Best Prices", desc: "Exclusive deals on top categories" },
   ];
 
   return (
@@ -148,21 +115,16 @@ export default function HomeScreen() {
 
       <main className="home-main">
 
-        {/* ============================ */}
-        {/* HERO SECTION */}
-        {/* ============================ */}
+        {/* HERO */}
         <section className="hero-section">
           <div className="hero-content">
-
-            {/* REMOVED BADGE COMPLETELY */}
-
             <h1 className="hero-title">
               Order Health & Wellness Products<br />From Home
             </h1>
 
             <p className="hero-subtitle">
-              Browse and order medicines, wellness essentials, fitness gear,
-              baby care, personal care, surgical items and more.
+              Browse and order medicines, fitness, wellness, personal care,
+              baby products & more.
             </p>
 
             <a href="/explore" className="hero-cta">Shop Now →</a>
@@ -177,32 +139,25 @@ export default function HomeScreen() {
           </div>
         </section>
 
-        {/* ============================ */}
-        {/* SEARCH BAR */}
-        {/* ============================ */}
+        {/* SEARCH */}
         <div className="search-wrapper">
           <div className="search-container">
             <MdSearch size={22} className="search-icon" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search doctors, services, medicines..."
+              placeholder="Search categories…"
               className="search-input"
             />
           </div>
         </div>
 
-        {/* ============================ */}
-        {/* MAIN SERVICES */}
-        {/* ============================ */}
+        {/* QUICK ACCESS */}
         <Section title="Quick Access" />
+
         <div className="top-services-section">
           {mainServices.map((s, i) => (
-            <div
-              key={i}
-              className="main-service-card hover-lift"
-              onClick={() => navigate(s.route)}
-            >
+            <div key={i} className="main-service-card hover-lift" onClick={() => navigate(s.route)}>
               <div className="main-service-img-box" style={{ background: s.bg }}>
                 <img src={s.image} className="main-service-img" alt={s.title} />
               </div>
@@ -213,10 +168,8 @@ export default function HomeScreen() {
           ))}
         </div>
 
-        {/* ============================ */}
         {/* PROMOTIONS */}
-        {/* ============================ */}
-        <Section title="Promotions" />
+        <Section title="Wellness Picks" />
         <div className="promo-carousel">
           {promotions.map((p) => (
             <img
@@ -229,113 +182,40 @@ export default function HomeScreen() {
           ))}
         </div>
 
-        {/* ============================ */}
-        {/* DEPARTMENTS */}
-        {/* ============================ */}
-        <Section title="All Departments" />
-        <div className="departments-scroll">
-          {filteredDepartments.map((d) => (
-            <button
-              key={d.id}
-              className="dept-chip"
-              style={{ borderColor: d.color }}
-              onClick={() =>
-                navigate("/department-details", { state: { departmentId: d.id } })
-              }
-            >
-              <span className="dept-icon">{d.icon}</span>
-              {d.name}
-            </button>
-          ))}
-        </div>
+        {/* CATEGORY GRID */}
+        <Section title="Shop By Category" />
+        <div className="category-scroll">
+  {filteredCategories.map((c) => (
+    <div
+      key={c.id}
+      className="category-card-h"
+      onClick={() => navigate(`/${c.id}`)}
+    >
+      <img src={c.image} className="category-img-h" alt={c.name} />
+      <p className="category-name-h">{c.name}</p>
+    </div>
+  ))}
+</div>
 
-        {/* ============================ */}
-        {/* TRANSPLANT + FEATURED */}
-        {/* ============================ */}
-        <div className="split-70-30">
-          <div className="left-70">
-            <Section title="Transplant Connect" />
-            <div
-              className="transplant-banner click-card hover-lift"
-              onClick={() => navigate("/TransplantConnect")}
-            >
-              <img
-                src="https://productimagestesting.s3.ap-south-1.amazonaws.com/Transplant+connect_11zon.jpg"
-                className="transplant-img"
-                alt="Transplant Connect"
-              />
-              <div className="transplant-overlay">
-                <h3>Organ Transplant Care</h3>
-                <p>Specialized support & guidance for transplant families</p>
-                <a href="/TransplantConnect" className="transplant-cta">
-                  Learn More
-                </a>
-              </div>
-            </div>
-          </div>
 
-          <div className="right-30">
-            <Section title="Featured Services" />
-            <div className="featured-carousel">
-              {featuredServices.map((item) => (
-                <div
-                  key={item.id}
-                  className="featured-item hover-lift"
-                  onClick={() => item.link && navigate(item.link)}
-                >
-                  {item.imageUrl ? (
-                    <img src={item.imageUrl} className="featured-img" alt={item.name} />
-                  ) : (
-                    <div
-                      className="featured-fallback"
-                      style={{
-                        background: item.bgColor,
-                        color: item.textColor,
-                      }}
-                    >
-                      <span>{item.name}</span>
-                    </div>
-                  )}
-
-                  <div className="featured-info">
-                    <h4>{item.name}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ============================ */}
         {/* TOP SERVICES + HEALTH TIPS */}
-        {/* ============================ */}
         <div className="new-layout-container">
 
-          {/* LEFT */}
           <div className="layout-left">
             <Section title="Top Services" />
-
             <div className="vertical-list">
               {topServices.map((s) => (
                 <div
                   key={s.id}
                   className="ts-card hover-lift"
-                  style={{
-                    background: s.bgColor || "#ffffff",
-                    color: s.textColor || "#1e293b",
-                  }}
+                  style={{ background: s.bgColor || "#fff", color: s.textColor || "#222" }}
                   onClick={() => s.link && navigate(s.link)}
                 >
-                  {s.imageUrl ? (
+                  {s.imageUrl && (
                     <div className="ts-img-box">
                       <img src={s.imageUrl} className="ts-img" alt={s.title} />
                     </div>
-                  ) : (
-                    <div className="ts-fallback">
-                      <h3>{s.title}</h3>
-                    </div>
                   )}
-
                   <div className="ts-info">
                     <h3>{s.title}</h3>
                     {s.subtitle && <p>{s.subtitle}</p>}
@@ -348,7 +228,6 @@ export default function HomeScreen() {
           {/* RIGHT */}
           <div className="layout-right">
             <Section title="Health Tips" />
-
             <div className="tips-list">
               {healthTips.map((t) => (
                 <div key={t.id} className="tip-fb-card hover-lift">
@@ -370,9 +249,7 @@ export default function HomeScreen() {
           </div>
         </div>
 
-        {/* ============================ */}
         {/* BEST OFFERS */}
-        {/* ============================ */}
         <Section title="Best Offers" />
         <div className="best-offers-row">
           {bestOffers.map((o) => (
@@ -380,19 +257,9 @@ export default function HomeScreen() {
               key={o.id}
               className="offer-card hover-lift"
               onClick={() => o.link && navigate(o.link)}
-              style={{
-                background: o.bgColor || "#ffffff",
-                color: o.textColor || "#1e293b",
-              }}
+              style={{ background: o.bgColor || "#fff", color: o.textColor || "#222" }}
             >
-              {o.imageUrl ? (
-                <img src={o.imageUrl} className="offer-img" alt={o.title} />
-              ) : (
-                <div className="offer-fallback">
-                  <h3>{o.title}</h3>
-                </div>
-              )}
-
+              {o.imageUrl && <img src={o.imageUrl} className="offer-img" alt={o.title} />}
               <div className="offer-info">
                 <h3>{o.title}</h3>
                 {o.subtitle && <p>{o.subtitle}</p>}
@@ -401,50 +268,66 @@ export default function HomeScreen() {
           ))}
         </div>
 
-        {/* ============================ */}
         {/* WHY CHOOSE HEALTHYZ */}
-        {/* ============================ */}
-        <section className="why-choose-section">
-          <div className="why-choose-container">
-            <h2 className="why-choose-title">Why Choose HealthYz?</h2>
-            <p className="why-choose-subtitle">
-              We’re committed to providing you with the best healthcare experience
-            </p>
+       {/* ============================ */}
+{/* WHY CHOOSE HEALTHYZ */}
+{/* ============================ */}
 
-            <div className="features-grid">
-              {whyChooseData.map((item, i) => (
-                <div key={i} className="feature-card hover-lift">
-                  <span className="feature-icon">{item.icon}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              ))}
-            </div>
+<section className="why-choose-section">
+  <div className="why-choose-container">
+    <h2 className="why-choose-title">Why Choose HealthYz?</h2>
+    <p className="why-choose-subtitle">
+      Your trusted partner for wellness & healthcare essentials
+    </p>
 
-            {/* Testimonials */}
-            <div className="testimonials">
-              <h3>What Our Patients Say</h3>
-              <div className="testimonial-cards">
-                {testimonials.map((t, i) => (
-                  <div key={i} className="testimonial-card">
-                    <div className="testimonial-rating">{t.rating}</div>
-                    <p className="testimonial-text">{t.text}</p>
+    <div className="features-grid">
 
-                    <div className="testimonial-author">
-                      <div className="author-avatar">{t.avatar}</div>
-                      <div>
-                        <div className="author-name">{t.name}</div>
-                        <div className="author-role">{t.role}</div>
-                      </div>
-                    </div>
+      {/* 1 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">⚡</span>
+        <h3>Fast Delivery</h3>
+        <p>Quick doorstep delivery for all products</p>
+      </div>
 
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* 2 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">🔒</span>
+        <h3>Private & Secure</h3>
+        <p>Your health & wellness data stays private</p>
+      </div>
 
-          </div>
-        </section>
+      {/* 3 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">❤️</span>
+        <h3>Trusted Products</h3>
+        <p>Handpicked & verified wellness essentials</p>
+      </div>
+
+      {/* 4 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">💰</span>
+        <h3>Best Prices</h3>
+        <p>Exclusive deals across top categories</p>
+      </div>
+
+      {/* 5 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">📦</span>
+        <h3>Wide Product Range</h3>
+        <p>Everything from medicines to sexual wellness</p>
+      </div>
+
+      {/* 6 */}
+      <div className="feature-card hover-lift">
+        <span className="feature-icon">🛡️</span>
+        <h3>Quality Assurance</h3>
+        <p>Every item goes through strict quality checks</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       </main>
     </div>
@@ -452,13 +335,10 @@ export default function HomeScreen() {
 }
 
 // Reusable Section
-function Section({ title, children }) {
+function Section({ title }) {
   return (
     <div className="section">
-      <h2 className="section-title">
-        {title}
-        {children}
-      </h2>
+      <h2 className="section-title">{title}</h2>
     </div>
   );
 }

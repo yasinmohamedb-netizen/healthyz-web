@@ -71,6 +71,10 @@ import ActionPolicy from "./screens/ActionPolicy";
 import AllDepartments from "./screens/Departments/AllDepartments";
 import DepartmentDetails from "./screens/Departments/DepartmentDetails";
 
+import WellnessPage from "./screens/Services/WellnessPage";
+import SelfTestsPage from "./screens/Services/SelfTestsPage";
+
+
 
 // ===============================
 // AUTH WRAPPER
@@ -122,6 +126,9 @@ function AppRoutes({ user }) {
       <Route path="/pilates" element={<Pilates />} />
       <Route path="/zumba" element={<Zumba user={user} />} />
       <Route path="/personal-training" element={<PersonalTraining />} />
+      <Route path="/wellness" element={<WellnessPage />} />
+      <Route path="/self-tests" element={<SelfTestsPage />} />
+
 
       {/* DEPARTMENTS */}
       <Route path="/departments" element={<AllDepartments />} />

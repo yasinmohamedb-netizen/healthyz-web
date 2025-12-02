@@ -1,0 +1,343 @@
+.self-tests-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  background: linear-gradient(135deg, #f8f4ff, #eef0fa);
+  border-radius: 24px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 50px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.05) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.st-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.st-subtitle {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-tags {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-tags span {
+  background: white;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6a3de8;
+  box-shadow: 0 2px 8px rgba(106, 61, 232, 0.1);
+}
+
+/* ===== SECTION STYLES ===== */
+.quiz-section {
+  margin-bottom: 60px;
+}
+
+.st-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 40px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-desc {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.05rem;
+}
+
+/* ===== QUIZ CARD (COLLAPSIBLE) ===== */
+.quiz-card {
+  background: white;
+  padding: 18px 24px;
+  margin: 12px 0;
+  border-radius: 16px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #2c3e50;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-card.active {
+  border: 2px solid #6a3de8;
+  background: #f5f0ff;
+}
+
+.quiz-icon {
+  font-size: 1.4rem;
+  margin-right: 12px;
+}
+
+.chevron {
+  font-size: 1rem;
+  color: #888;
+  transition: transform 0.3s;
+}
+
+.quiz-card.active .chevron {
+  transform: rotate(180deg);
+}
+
+/* ===== EXPANDED QUIZ BOX ===== */
+.quiz-box {
+  background: #fafcff;
+  padding: 30px;
+  border-radius: 20px;
+  margin: 16px 0 40px;
+  border: 1px solid #eef2ff;
+  animation: fadeInUp 0.6s ease;
+}
+
+.quiz-question {
+  margin-bottom: 24px;
+}
+
+.quiz-question p {
+  font-size: 1.05rem;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.option-pill {
+  padding: 12px 16px;
+  background: #f0f5fa;
+  border: 2px solid #e0eaf5;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.option-pill:hover {
+  background: #e6effa;
+}
+
+.option-pill.selected {
+  background: #6a3de8;
+  color: white;
+  border-color: #6a3de8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 61, 232, 0.2);
+}
+
+.submit-btn {
+  background: #6a3de8;
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(106, 61, 232, 0.3);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-btn.pulse:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* ===== RESULT CARD ===== */
+.result-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-top: 24px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid;
+}
+
+.result-red { border-left-color: #e74c3c; }
+.result-orange { border-left-color: #f39c12; }
+.result-green { border-left-color: #27ae60; }
+.result-blue { border-left-color: #3498db; }
+
+.result-text {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.result-cta {
+  display: inline-block;
+  background: #6a3de8;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.result-cta:hover {
+  background: #5a33c7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(106, 61, 232, 0.4);
+}
+
+.retake-btn {
+  background: transparent;
+  color: #6a3de8;
+  border: 2px solid #6a3de8;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+
+.retake-btn:hover {
+  background: #f5f0ff;
+}
+
+/* ===== FOOTER CTA ===== */
+.footer-cta {
+  text-align: center;
+  margin: 80px 0 40px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fff8e6, #fff0cc);
+  border-radius: 24px;
+  border: 2px dashed #ffd580;
+}
+
+.footer-cta p {
+  font-size: 1.2rem;
+  color: #d47c00;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.share-btn {
+  background: #d47c00;
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+  background: #c06f00;
+  transform: scale(1.05);
+}
+
+/* ===== UTILITIES ===== */
+.card-shadow {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .st-title {
+    font-size: 2rem;
+  }
+
+  .st-section-title {
+    font-size: 1.5rem;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-card {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+
+  .benefit-tags {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -137,7 +137,7 @@ export default function Footer() {
           {/* Column 2 */}
           <div>
             <h4 className="footer-title">Services</h4>
-            <Link to="/video-consultation" className="footer-item">Online Consultation</Link>
+            {/* <Link to="/video-consultation" className="footer-item">Online Consultation</Link> */}
             <Link to="/home-care-services" className="footer-item">Home Care Services</Link>
             <Link to="/wellness-trainers" className="footer-item">Personal Trainers</Link>
             <Link to="/TransplantConnect" className="footer-item">International Patients</Link>
