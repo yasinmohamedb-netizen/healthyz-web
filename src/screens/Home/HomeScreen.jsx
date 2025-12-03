@@ -249,6 +249,32 @@ export default function HomeScreen() {
           </div>
         </div>
 
+        {/* ============================== */}
+{/*  TRANSPLANT CONNECT – FULL WIDTH */}
+{/* ============================== */}
+
+<Section title="Transplant Connect" />
+
+<div
+  className="transplant-full-banner hover-lift"
+  onClick={() => navigate("/TransplantConnect")}
+>
+  <img
+    src="https://productimagestesting.s3.ap-south-1.amazonaws.com/Transplant+connect_11zon.jpg"
+    alt="Transplant Connect"
+    className="transplant-full-img"
+  />
+
+  <div className="transplant-full-overlay">
+    <h3>Organ Transplant Care</h3>
+    <p>Specialized support & guidance for transplant families</p>
+    <a href="/TransplantConnect" className="transplant-full-cta">
+      Learn More →
+    </a>
+  </div>
+</div>
+
+
         {/* BEST OFFERS */}
         <Section title="Best Offers" />
         <div className="best-offers-row">
@@ -267,6 +293,8 @@ export default function HomeScreen() {
             </div>
           ))}
         </div>
+
+        
 
         {/* WHY CHOOSE HEALTHYZ */}
        {/* ============================ */}

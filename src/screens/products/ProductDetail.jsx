@@ -1,6 +1,6 @@
 // =======================================
 // src/screens/products/ProductDetail.jsx
-// FINAL PRODUCTION VERSION
+// FINAL PRODUCTION VERSION (UPDATED)
 // =======================================
 
 import React, { useState, useEffect, useContext } from "react";
@@ -8,7 +8,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { BASE_URL } from "../../context/config";
 import "./ProductDetail.css";
-import ProductDetailSEO from "../../seo/ProductDetailSEO";
+
+import ProductSEO from "../../seo/ProductSEO";   // <-- UPDATED SEO FILE
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -69,7 +70,13 @@ export default function ProductDetail() {
   if (!product) return <div className="pd-loading">Loading...</div>;
 
   // PRODUCT CALCULATIONS
-  const images = product.images?.length ? product.images : [product.image];
+  const images =
+    product.images?.length > 0
+      ? product.images
+      : product.image
+      ? [product.image]
+      : [];
+
   const price = Number(product.price);
   const discount = product.discount || 0;
   const finalPrice = Math.round(price - price * (discount / 100));
@@ -81,7 +88,9 @@ export default function ProductDetail() {
 
   return (
     <div className="pd-wrapper">
-      <ProductDetailSEO product={product} />
+      
+      {/* ⭐ SEO SECTION */}
+      <ProductSEO product={product} />  
 
       {/* MAIN PRODUCT SECTION */}
       <div className="pd-main">
@@ -175,7 +184,7 @@ export default function ProductDetail() {
             <div
               key={item._id}
               className="sim-card"
-              onClick={() => navigate(`/product-details/${item._id}`)}
+              onClick={() => navigate(`/product/${item._id}`)}  // <-- FIXED ROUTE
             >
               <div className="sim-img-box">
                 <img src={img} alt={item.name} />
