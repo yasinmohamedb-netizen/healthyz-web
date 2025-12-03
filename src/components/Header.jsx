@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../assets/HealthyzLogo.png";
 import { getAuth } from "firebase/auth";
@@ -14,7 +14,7 @@ export default function Header() {
           color: "#F29100",
           fontWeight: 600,
           borderBottom: "2px solid #F29100",
-          paddingBottom: "4px",
+          paddingBottom: "3px",
         }
       : { color: "#1D1D1B" };
 
@@ -27,56 +27,30 @@ export default function Header() {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
       }}
     >
-      {/* RESPONSIVE RULES */}
+      {/* RESPONSIVE CSS */}
       <style>
         {`
           @media (max-width: 768px) {
             .header-inner {
-              height: 60px !important;
-              padding: 6px 14px !important;
-            }
-            .header-inner img {
-              width: 110px !important;
+              height: 58px !important;
+              padding: 6px 12px !important;
+              gap: 10px !important;
             }
 
-            /* ⭐ ALWAYS SHOW NAV ON MOBILE */
+            .header-logo {
+              width: 105px !important;
+            }
+
             .nav-desktop {
-              display: flex !important;
-              gap: 20px !important;
-              font-size: 14px !important;
+              gap: 14px !important;
+              font-size: 13px !important;
             }
 
-            /* Hide login button only, keep nav */
-            .login-desktop {
-              display: none !important;
-            }
-
-            /* Hide hamburger always */
-            .menu-btn {
-              display: none !important;
-            }
-
-            /* Hide dropdown */
-            .mobile-menu {
-              display: none !important;
-            }
-          }
-
-          @media (min-width: 769px) {
-            .header-inner {
-              height: 70px !important;
-              padding: 0 20px !important;
-            }
-            .header-inner img {
-              width: 150px !important;
-            }
-
-            .menu-btn,
-            .mobile-menu {
-              display: none !important;
+            .login-btn {
+              padding: 6px 10px !important;
+              font-size: 12px !important;
             }
           }
         `}
@@ -88,9 +62,11 @@ export default function Header() {
           maxWidth: "1200px",
           margin: "0 auto",
           display: "flex",
-          height: "70px",
           alignItems: "center",
           justifyContent: "space-between",
+          height: "70px",
+          padding: "0 20px",
+          gap: "20px",
         }}
       >
         {/* LOGO */}
@@ -98,24 +74,25 @@ export default function Header() {
           <img
             src={Logo}
             alt="Healthyz"
+            className="header-logo"
             style={{
               width: "150px",
-              height: "auto",
               objectFit: "contain",
-              transition: "0.3s",
+              transition: "0.2s",
             }}
           />
         </Link>
 
-        {/* ⭐ ALWAYS VISIBLE HOME / EXPLORE / PROFILE */}
+        {/* NAVIGATION */}
         <nav
           className="nav-desktop"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "28px",
+            gap: "26px",
             fontSize: "15px",
             fontWeight: 500,
+            whiteSpace: "nowrap",
           }}
         >
           <Link to="/home" style={isActive("/home")}>
@@ -123,38 +100,35 @@ export default function Header() {
           </Link>
 
           <Link to="/explore" style={isActive("/explore")}>
-          HealthYz Store
+            HealthYz Store
           </Link>
-
-          {/* <Link to="/profile" style={isActive("/profile")}>
-            Profile
-          </Link> */}
         </nav>
 
-        {/* Desktop Login/Profile Button */}
+        {/* LOGIN / PROFILE BUTTON */}
         <Link
-          to={user ? "/profile" : "/login"}
-          className="login-desktop"
-          style={{
-            padding: "8px 18px",
-            borderRadius: "6px",
-            fontSize: "14px",
-            background: "#F29100",
-            textDecoration: "none",
-            color: "#fff",
-            fontWeight: 600,
-            border: "1px solid #F29100",
-            transition: "0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.background = "#1D1D1B";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = "#F29100";
-          }}
-        >
-          {user ? "My Profile" : "Login / Signup"}
-        </Link>
+  to={user ? "/profile" : "/login"}
+  className="login-btn"
+  style={{
+    padding: "7px 16px",
+    borderRadius: "10px",
+    fontSize: "13px",
+    background: "#F29100",
+    textDecoration: "none",
+    color: "#ffffff",
+    fontWeight: 500,
+  
+    
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+  onMouseEnter={(e) => (e.target.style.background = "#F29100")}
+  onMouseLeave={(e) => (e.target.style.background = "#1D1D1B")}
+>
+  {user ? "Profile" : "Login / Signup"}
+</Link>
+
+
       </div>
     </header>
   );
