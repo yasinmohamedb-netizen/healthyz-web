@@ -149,8 +149,8 @@ export default function SurgicalProductsScreen() {
           </div>
         </div>
 
-        {/* PROMO BANNERS */}
-        {!loadingBanners && promoBanners.length > 0 && (
+        {/* PROMO BANNERS — now hidden whenever searchTerm is filled */}
+        {!searchTerm.trim() && !loadingBanners && promoBanners.length > 0 && (
           <div className="promo-wide-scroll">
             {promoBanners.map((b) => (
               <div key={b.id} className="promo-wide-card">
@@ -234,7 +234,7 @@ export default function SurgicalProductsScreen() {
         )}
       </div>
 
-      {/* INLINE STYLES — SAME AS BEAUTY/GYM/MEDICINE */}
+      {/* INLINE STYLES — SAME AS OTHER PAGES */}
       <style>{`
         .section-header {
           display: flex;

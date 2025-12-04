@@ -147,8 +147,8 @@ export default function SexualProducts() {
           </div>
         </div>
 
-        {/* PROMO BANNERS */}
-        {!loadingBanners && promoBanners.length > 0 && (
+        {/* PROMO BANNERS — hidden while typing */}
+        {!searchTerm && !loadingBanners && promoBanners.length > 0 && (
           <div className="promo-wide-scroll">
             {promoBanners.map((b) => (
               <div key={b.id} className="promo-wide-card">

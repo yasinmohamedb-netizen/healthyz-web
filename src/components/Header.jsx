@@ -123,7 +123,7 @@ export default function Header() {
     justifyContent: "center",
   }}
   onMouseEnter={(e) => (e.target.style.background = "#F29100")}
-  onMouseLeave={(e) => (e.target.style.background = "#1D1D1B")}
+  onMouseLeave={(e) => (e.target.style.background = "#F29100")}
 >
   {user ? "Profile" : "Login / Signup"}
 </Link>

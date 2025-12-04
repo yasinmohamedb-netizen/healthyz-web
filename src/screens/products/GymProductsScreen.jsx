@@ -146,8 +146,8 @@ export default function GymProductsScreen() {
           </div>
         </div>
 
-        {/* PROMO BANNERS */}
-        {!loadingBanners && promoBanners.length > 0 && (
+        {/* ⭐ PROMO BANNERS — HIDE WHEN SEARCHING ⭐ */}
+        {searchTerm.trim().length === 0 && !loadingBanners && promoBanners.length > 0 && (
           <div className="promo-wide-scroll">
             {promoBanners.map((b) => (
               <div key={b.id} className="promo-wide-card">

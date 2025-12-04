@@ -175,52 +175,57 @@ export default function ExploreScreen() {
             </div>
           </div>
 
-          {/* PROMO BANNERS */}
-          <div className="promo-wide-scroll">
-            {promoBanners.map((b) => (
-              <div key={b.id} className="promo-wide-card">
-                <img src={b.imageUrl} alt={b.title} className="promo-wide-img" />
+          {/* ⭐ HIDE THESE SECTIONS WHEN SEARCHING ⭐ */}
+          {searchTerm.trim().length === 0 && (
+            <>
+              {/* PROMO BANNERS */}
+              <div className="promo-wide-scroll">
+                {promoBanners.map((b) => (
+                  <div key={b.id} className="promo-wide-card">
+                    <img src={b.imageUrl} alt={b.title} className="promo-wide-img" />
 
-                <div className="promo-wide-info">
-                  <h2 className="promo-wide-title">{b.title}</h2>
-                  <p className="promo-wide-sub">{b.subtitle}</p>
+                    <div className="promo-wide-info">
+                      <h2 className="promo-wide-title">{b.title}</h2>
+                      <p className="promo-wide-sub">{b.subtitle}</p>
 
-                  <button
-                    className="promo-wide-btn"
-                    onClick={() => b.link && navigate(b.link)}
+                      <button
+                        className="promo-wide-btn"
+                        onClick={() => b.link && navigate(b.link)}
+                      >
+                        Shop Now →
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* ============================== */}
+              {/*   SHOP BY CATEGORY SECTION     */}
+              {/* ============================== */}
+
+              <Section title="Shop By Category" />
+
+              <div className="explore-category-grid">
+                {categories.map((c) => (
+                  <div
+                    key={c.id}
+                    className="explore-category-card hover-lift"
+                    onClick={() => navigate(`/${c.id}`)}
                   >
-                    Shop Now →
-                  </button>
-                </div>
+                    <img
+                      src={
+                        c.image ||
+                        "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg"
+                      }
+                      alt={c.name}
+                      className="explore-category-img"
+                    />
+                    <p className="explore-category-name">{c.name}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* ============================== */}
-          {/*   SHOP BY CATEGORY SECTION     */}
-          {/* ============================== */}
-
-          <Section title="Shop By Category" />
-
-          <div className="explore-category-grid">
-            {categories.map((c) => (
-              <div
-                key={c.id}
-                className="explore-category-card hover-lift"
-                onClick={() => navigate(`/${c.id}`)}
-              >
-                <img
-                  src={
-                    c.image ||
-                    "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg"
-                  }
-                  alt={c.name}
-                  className="explore-category-img"
-                />
-                <p className="explore-category-name">{c.name}</p>
-              </div>
-            ))}
-          </div>
+            </>
+          )}
 
           {/* MOBILE FILTERS */}
           <div className="mobile-filter-area">
