@@ -184,9 +184,9 @@ export default function Footer() {
           <h2 style={{ fontSize: "22px", fontWeight: "700", color: "#1D1D1B", margin: "0" }}>
             HealthYz
           </h2>
-          <p className="footer-copy" style={{ marginTop: "4px" }}>
+          {/* <p className="footer-copy" style={{ marginTop: "4px" }}>
             © 2025 Healthyz by Zayz Healthcare LLP. All rights reserved.
-          </p>
+          </p> */}
         </div>
 
       </footer>

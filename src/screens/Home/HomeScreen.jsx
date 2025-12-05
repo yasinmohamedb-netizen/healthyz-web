@@ -91,8 +91,8 @@ export default function HomeScreen() {
     { id: "beauty", name: "Beauty", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
     { id: "sexual", name: "Sexual Wellness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
     { id: "babycare", name: "Baby Care", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    // { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    // { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
   ];
 
   const filteredCategories = categories.filter((c) =>

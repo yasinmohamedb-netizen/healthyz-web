@@ -24,8 +24,8 @@ export default function SidebarFilters({
       sexual: "/sexual",
       baby: "/babycare",
       babycare: "/babycare",
-      medicines: "/medicines",
-      surgical: "/surgical",
+      // medicines: "/medicines",
+      // surgical: "/surgical",
     };
 
     if (routes[id]) return navigate(routes[id]);

@@ -50,8 +50,8 @@ export default function ExploreScreen() {
     { id: "beauty", name: "Beauty" },
     { id: "sexual", name: "Sexual Wellness" },
     { id: "babycare", name: "Baby Care" },
-    { id: "medicines", name: "Medicines" },
-    { id: "surgical", name: "Surgical" },
+    // { id: "medicines", name: "Medicines" },
+    // { id: "surgical", name: "Surgical" },
   ];
 
   // Load Promo Banners
