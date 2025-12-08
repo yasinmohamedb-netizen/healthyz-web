@@ -127,16 +127,28 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <h2 style={{
-            fontSize: "22px",
-            fontWeight: "700",
-            color: "#1D1D1B",
-            margin: 0
-          }}>
+          <h2
+            style={{
+              fontSize: "22px",
+              fontWeight: "700",
+              color: "#1D1D1B",
+              margin: 0,
+            }}
+          >
             HealthYz
           </h2>
-        </div>
 
+          {/* Required by Cashfree */}
+          <p
+            style={{
+              marginTop: "4px",
+              fontSize: "12px",
+              color: "#1D1D1B",
+            }}
+          >
+            Owned & Operated by BASHEER AHAMED MOHAMED YASIN
+          </p>
+        </div>
       </footer>
     </>
   );
