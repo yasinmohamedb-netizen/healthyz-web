@@ -25,10 +25,7 @@ export default function PrivacyPolicyPage() {
         Contact: <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>
       </p>
 
-      {/* --------------------------- */}
-      {/*   LINKS TO OTHER POLICIES  */}
-      {/* --------------------------- */}
-
+      {/* LINKS */}
       <p style={{ marginTop: "20px" }}>
         <strong>Related Policies:</strong>
         <br />
@@ -41,17 +38,16 @@ export default function PrivacyPolicyPage() {
         </a>
       </p>
 
-      {/* --------------------------- */}
-      {/*      PRIVACY POLICY TEXT    */}
-      {/* --------------------------- */}
-
+      {/* INTRO */}
       <p style={{ marginTop: "20px" }}>
         Your privacy is important to us. This Privacy Policy explains how
         HealthYz (“we”, “our”, or “us”) collects, uses, stores, and protects
-        your information when you use our mobile app and online shopping
-        services. By using HealthYz, you agree to the practices outlined below.
+        your information when you use our website, mobile app, and online
+        shopping services. By using HealthYz, you agree to the practices outlined
+        below.
       </p>
 
+      {/* SECTION 1 */}
       <h2 style={{ marginTop: "30px" }}>1. Information We Collect</h2>
       <ul>
         <li>
@@ -60,13 +56,11 @@ export default function PrivacyPolicyPage() {
         </li>
         <li>
           <strong>Order Information:</strong> Product orders, cart history, and
-          transaction details (payments handled securely by third-party
-          gateways).
+          transaction details (payments handled securely by third-party gateways).
         </li>
         <li>
           <strong>Device & Usage Data:</strong> Device model, OS version, app
-          version, usage analytics, crash reports, and Advertising ID (for
-          analytics only).
+          version, analytics, and crash logs.
         </li>
         <li>
           <strong>Location Data (Optional):</strong> Approximate location to
@@ -78,15 +72,17 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
+      {/* SECTION 2 */}
       <h2 style={{ marginTop: "30px" }}>2. How We Use Your Information</h2>
       <ul>
         <li>To process and deliver product orders</li>
         <li>To personalize your shopping experience</li>
-        <li>To send order updates, notifications, and alerts</li>
-        <li>To analyze app performance and improve user experience</li>
+        <li>To send order updates and notifications</li>
+        <li>To analyze performance and improve user experience</li>
         <li>To ensure account security and prevent fraud</li>
       </ul>
 
+      {/* SECTION 3 */}
       <h2 style={{ marginTop: "30px" }}>3. Sharing of Information</h2>
       <p>
         We do <strong>not</strong> sell your personal information. We may share
@@ -94,8 +90,9 @@ export default function PrivacyPolicyPage() {
       </p>
       <ul>
         <li>
-          <strong>Trusted third-party partners:</strong> Firebase, Razorpay,
-          cloud hosting, logistics partners, analytics tools.
+          <strong>Trusted third-party partners:</strong> analytics tools, cloud
+          hosting providers, logistics and delivery partners, and payment
+          gateway services.
         </li>
         <li>
           <strong>Legal authorities</strong> when required for compliance or
@@ -103,92 +100,107 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <h2 style={{ marginTop: "30px" }}>4. Advertising & Analytics</h2>
+      {/* SECTION — PAYMENT */}
+      <h2 style={{ marginTop: "30px" }}>4. Payments & Billing</h2>
+      <p>
+        We use secure third-party payment gateways to process transactions. We
+        do <strong>not</strong> store or have access to your card, UPI, or bank
+        account details. All sensitive financial data is handled directly by the
+        payment provider using encrypted and industry-standard security
+        protocols.
+      </p>
+
+      {/* SECTION 4 (Analytics) */}
+      <h2 style={{ marginTop: "30px" }}>5. Advertising & Analytics</h2>
       <ul>
-        <li>We use Firebase Analytics for anonymized usage tracking.</li>
+        <li>We use analytics tools for anonymized usage tracking.</li>
         <li>
-          Any Advertising ID is used strictly for analytics, not personalized
-          ads.
+          Advertising ID, if collected, is used only for analytics and not for
+          personalized advertising.
         </li>
       </ul>
 
-      <h2 style={{ marginTop: "30px" }}>5. Data Security</h2>
+      {/* SECTION 5 */}
+      <h2 style={{ marginTop: "30px" }}>6. Data Security</h2>
       <p>
-        We use industry-standard security practices including encryption,
-        secure servers, authentication controls, and restricted access.
+        We use industry-standard security practices including encryption, secure
+        servers, authentication controls, and restricted data access.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>6. User Rights</h2>
+      {/* SECTION 6 */}
+      <h2 style={{ marginTop: "30px" }}>7. User Rights</h2>
       <ul>
         <li>Access your data</li>
         <li>Update or correct your information</li>
-        <li>Request deletion of your account</li>
+        <li>Request account deletion</li>
         <li>Opt-out of analytics tracking (if supported)</li>
       </ul>
       <p>
-        To make a request, email{" "}
+        To submit a request, email{" "}
         <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>7. Data Retention</h2>
+      {/* SECTION 7 */}
+      <h2 style={{ marginTop: "30px" }}>8. Data Retention</h2>
       <p>
-        We retain user and order-related data while your account is active. Data
-        may be retained longer if required for legal or accounting purposes.
+        We retain user and order-related data while your account is active. Some
+        data may be retained longer for legal, fraud-prevention, or accounting
+        purposes.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>8. Children’s Privacy</h2>
+      {/* SECTION 8 */}
+      <h2 style={{ marginTop: "30px" }}>9. Children’s Privacy</h2>
       <p>
         HealthYz is intended for users <strong>18+</strong>. We do not knowingly
         collect information from children.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>9. Changes to This Policy</h2>
+      {/* SECTION 9 */}
+      <h2 style={{ marginTop: "30px" }}>10. Changes to This Policy</h2>
       <p>
-        Updates may occur periodically. The “Last updated” date reflects the
-        latest version.
+        Updates may occur periodically. The “Last updated” date reflects the most
+        recent revision.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>10. Contact Us</h2>
+      {/* SECTION 10 */}
+      <h2 style={{ marginTop: "30px" }}>11. Contact Us</h2>
       <p>
         For questions or privacy concerns, contact{" "}
         <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>.
       </p>
 
-      {/* ------------------------------------------------------ */}
-      {/*                REFUND & CANCELLATION POLICY             */}
-      {/* ------------------------------------------------------ */}
-
-      <h2 style={{ marginTop: "40px" }}>11. Refund & Cancellation Policy</h2>
+      {/* REFUND POLICY */}
+      <h2 style={{ marginTop: "40px" }}>12. Refund & Cancellation Policy</h2>
 
       <p>
-        At <strong>HealthYz</strong>, we focus on delivering a smooth shopping
+        At <strong>HealthYz</strong>, we aim to deliver a smooth shopping
         experience for wellness, fitness, baby care, beauty, and personal care
-        products. Our refund policy ensures fairness and clarity.
+        products. Our refund policy ensures clarity and fairness.
       </p>
 
-      <h3 style={{ marginTop: "20px" }}>11.1 Product Order Refunds</h3>
+      <h3 style={{ marginTop: "20px" }}>12.1 Product Order Refunds</h3>
       <ul>
         <li>Refunds are applicable only for:</li>
         <ul>
           <li>Wrong or incorrect items</li>
-          <li>Damaged products</li>
-          <li>Expired or defective items</li>
+          <li>Damaged or defective products</li>
+          <li>Expired items</li>
           <li>Paid orders not delivered</li>
         </ul>
         <li>
-          Products must be returned unused, unopened, and in original packaging
+          Products must be returned unused, unopened, and in original packaging,
           unless defective.
         </li>
         <li>
-          Due to hygiene reasons, intimate/sexual wellness products cannot be
+          Due to hygiene reasons, intimate and sexual wellness products cannot be
           returned once opened.
         </li>
       </ul>
 
-      <h3 style={{ marginTop: "20px" }}>11.2 How to Request a Refund</h3>
+      <h3 style={{ marginTop: "20px" }}>12.2 How to Request a Refund</h3>
       <p>Email the following details to hello@healthyz.co:</p>
       <ul>
-        <li>Name & registered mobile number</li>
+        <li>Name and registered mobile number</li>
         <li>Order ID</li>
         <li>Date of purchase</li>
         <li>Reason for refund request</li>

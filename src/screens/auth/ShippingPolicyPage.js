@@ -23,16 +23,16 @@ export default function ShippingPolicyPage() {
 
       <p style={{ marginTop: "20px" }}>
         At <strong>HealthYz</strong>, we aim to provide fast, reliable, and
-        discreet delivery for all products, including wellness, fitness, and
-        intimate items. This Shipping Policy explains how your orders are
-        processed and delivered.
+        secure delivery for all wellness, fitness, beauty, baby care, and
+        personal care products. This Shipping Policy explains how your orders
+        are processed and delivered.
       </p>
 
       <h2 style={{ marginTop: "30px" }}>1. Shipping Time</h2>
       <ul>
         <li>
-          Orders are usually shipped within{" "}
-          <strong>24–48 hours</strong> of successful payment.
+          Orders are usually shipped within <strong>24–48 hours</strong> of
+          successful payment.
         </li>
         <li>
           Delivery time varies by location:
@@ -41,6 +41,10 @@ export default function ShippingPolicyPage() {
             <li>Other urban areas: 3–6 days</li>
             <li>Rural / remote areas: 5–10 days</li>
           </ul>
+        </li>
+        <li>
+          Delivery timelines may be affected by weather conditions, operational
+          delays, or courier restrictions.
         </li>
       </ul>
 
@@ -57,9 +61,7 @@ export default function ShippingPolicyPage() {
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>3. Order Tracking</h2>
-      <p>
-        Once your order is shipped, you will receive an SMS/email with:
-      </p>
+      <p>Once your order is shipped, you will receive an SMS/email with:</p>
       <ul>
         <li>Tracking ID</li>
         <li>Courier partner name</li>
@@ -71,19 +73,17 @@ export default function ShippingPolicyPage() {
         <li>
           All orders are packed in <strong>discreet, plain packaging</strong>.
         </li>
-        <li>No product names or sensitive details are printed on the package.</li>
+        <li>No sensitive product details are printed on the package.</li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>5. Delivery Attempts</h2>
       <ul>
-        <li>
-          Our courier partners make <strong>two or three delivery attempts</strong>.
-        </li>
+        <li>Our courier partners make <strong>two or three attempts</strong>.</li>
         <li>
           If the customer is unavailable, the order may be returned to our
           warehouse.
         </li>
-        <li>In such cases, re-delivery may incur additional charges.</li>
+        <li>Re-delivery may incur additional charges.</li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>6. Wrong or Incomplete Address</h2>
@@ -93,14 +93,14 @@ export default function ShippingPolicyPage() {
           incomplete shipping addresses.
         </li>
         <li>
-          If the order is returned due to incorrect address, re-shipping charges
+          If the order is returned due to address issues, re-shipping charges
           may apply.
         </li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>7. International Shipping</h2>
       <p>
-        Currently, we <strong>do not ship internationally</strong>. Orders are
+        We currently <strong>do not ship internationally</strong>. Orders are
         delivered only within India.
       </p>
 
@@ -108,17 +108,17 @@ export default function ShippingPolicyPage() {
       <ul>
         <li>
           If your package is lost in transit, we will initiate an investigation
-          with the courier.
+          with the courier partner.
         </li>
         <li>
-          Once confirmed lost, a <strong>full refund or replacement</strong> will
-          be provided.
+          Once confirmed lost, we will provide a{" "}
+          <strong>full refund or replacement</strong>.
         </li>
       </ul>
 
       <h2 style={{ marginTop: "30px" }}>9. Contact Us</h2>
       <p>
-        For any shipping or delivery concerns, contact our team at{" "}
+        For shipping or delivery-related concerns, contact us at{" "}
         <a href="mailto:hello@healthyz.co">hello@healthyz.co</a>.
       </p>
     </div>

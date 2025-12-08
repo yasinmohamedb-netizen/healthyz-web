@@ -79,9 +79,9 @@ export default function ExploreScreen() {
           "/gym/products",
           "/beauty/products",
           "/babycare/products",
-          "/medicines/products",
+          // "/medicines/products",
           "/sexual/products",
-          "/surgical/products",
+          // "/surgical/products",
         ];
 
         const responses = await Promise.all(

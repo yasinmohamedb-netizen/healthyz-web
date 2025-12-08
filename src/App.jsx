@@ -34,8 +34,9 @@ import OrdersScreen from "./screens/OrdersScreen";
 // STATIC PAGES
 import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicyPage from "./screens/auth/PrivacyPolicyPage";
-import RefundPolicyPage from "./screens/auth/RefundPolicyPage";          // ⭐ NEW
-import ShippingPolicyPage from "./screens/auth/ShippingPolicyPage";      // ⭐ NEW
+import RefundPolicyPage from "./screens/auth/RefundPolicyPage";
+import ShippingPolicyPage from "./screens/auth/ShippingPolicyPage";
+import HelpSupportPage from "./screens/auth/HelpSupportPage";   // ⭐ NEW
 
 // SERVICES
 import HomeCareServicesScreen from "./screens/Services/HomeCareServicesScreen";
@@ -75,7 +76,6 @@ import WellnessPage from "./screens/Services/WellnessPage";
 import SelfTestsPage from "./screens/Services/SelfTestsPage";
 
 
-
 // ===============================
 // AUTH WRAPPER
 // ===============================
@@ -101,8 +101,9 @@ function AppRoutes({ user }) {
       {/* STATIC POLICY PAGES */}
       <Route path="/terms" element={<TermsAndConditions />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-      <Route path="/refund-policy" element={<RefundPolicyPage />} />          {/* ⭐ NEW */}
-      <Route path="/shipping-policy" element={<ShippingPolicyPage />} />      {/* ⭐ NEW */}
+      <Route path="/refund-policy" element={<RefundPolicyPage />} />
+      <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+      <Route path="/support" element={<HelpSupportPage />} />  {/* ⭐ NEW */}
 
       {/* HOME */}
       <Route path="/" element={<Home />} />
@@ -112,10 +113,22 @@ function AppRoutes({ user }) {
       <Route path="/explore" element={<Explore />} />
 
       {/* PROFILE (AUTH REQUIRED) */}
-      <Route path="/profile" element={<RequireAuth user={user}><Profile /></RequireAuth>} />
-      <Route path="/bookings" element={<RequireAuth user={user}><Bookings /></RequireAuth>} />
-      <Route path="/consultations" element={<RequireAuth user={user}><YourConsultations /></RequireAuth>} />
-      <Route path="/orders" element={<RequireAuth user={user}><OrdersScreen /></RequireAuth>} />
+      <Route
+        path="/profile"
+        element={<RequireAuth user={user}><Profile /></RequireAuth>}
+      />
+      <Route
+        path="/bookings"
+        element={<RequireAuth user={user}><Bookings /></RequireAuth>}
+      />
+      <Route
+        path="/consultations"
+        element={<RequireAuth user={user}><YourConsultations /></RequireAuth>}
+      />
+      <Route
+        path="/orders"
+        element={<RequireAuth user={user}><OrdersScreen /></RequireAuth>}
+      />
 
       {/* SERVICES */}
       <Route path="/home-care-services" element={<HomeCareServicesScreen />} />
@@ -128,7 +141,6 @@ function AppRoutes({ user }) {
       <Route path="/personal-training" element={<PersonalTraining />} />
       <Route path="/wellness" element={<WellnessPage />} />
       <Route path="/self-tests" element={<SelfTestsPage />} />
-
 
       {/* DEPARTMENTS */}
       <Route path="/departments" element={<AllDepartments />} />
@@ -147,16 +159,25 @@ function AppRoutes({ user }) {
       <Route path="/cart" element={<CartScreen />} />
 
       {/* ADDRESS */}
-      <Route path="/address" element={<RequireAuth user={user}><AddressEditScreen /></RequireAuth>} />
+      <Route
+        path="/address"
+        element={<RequireAuth user={user}><AddressEditScreen /></RequireAuth>}
+      />
 
       {/* CONTACT */}
       <Route path="/contact" element={<ContactUs />} />
 
       {/* ORDER CANCEL POLICY */}
-      <Route path="/cancel-order" element={<RequireAuth user={user}><ActionPolicy /></RequireAuth>} />
+      <Route
+        path="/cancel-order"
+        element={<RequireAuth user={user}><ActionPolicy /></RequireAuth>}
+      />
 
       {/* CHECKOUT */}
-      <Route path="/checkout" element={<RequireAuth user={user}><CheckoutScreen /></RequireAuth>} />
+      <Route
+        path="/checkout"
+        element={<RequireAuth user={user}><CheckoutScreen /></RequireAuth>}
+      />
 
       {/* DEFAULT FALLBACK */}
       <Route path="*" element={<Home />} />
