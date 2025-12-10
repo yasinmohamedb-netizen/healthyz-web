@@ -146,7 +146,9 @@ export default function Footer() {
               color: "#1D1D1B",
             }}
           >
-            Owned & Operated by Tamil Nadu Medicals
+           Powered by Tamilnadu Medicals
+(Registered Proprietorship MSME Number UDYAM-TN-23-0055751)
+
           </p>
         </div>
       </footer>
