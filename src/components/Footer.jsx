@@ -146,7 +146,7 @@ export default function Footer() {
               color: "#1D1D1B",
             }}
           >
-            Owned & Operated by BASHEER AHAMED MOHAMED YASIN
+            Owned & Operated by Tamil Nadu Medicals
           </p>
         </div>
       </footer>
