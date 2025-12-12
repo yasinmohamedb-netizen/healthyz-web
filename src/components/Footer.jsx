@@ -8,73 +8,84 @@ export default function Footer() {
     <>
       <style>
         {`
-   .footer-wrapper {
-    width: 100%;
-    background: #439BAE;
-    color: #1D1D1B;
-    padding: 24px 0 12px;
-    margin-top: 30px;
-  }
+          .footer-wrapper {
+            width: 100%;
+            background: #439BAE;
+            color: #1D1D1B;
+            padding: 24px 0 12px;
+            margin-top: 30px;
+          }
 
-  .footer-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-    padding: 0 20px;
-  }
+          .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            padding: 0 20px;
+          }
 
-  .footer-title {
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #F29100;
-  }
+          .footer-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #F29100;
+          }
 
-  .footer-item {
-    color: #1D1D1B;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 6px;
-    font-size: 13px;
-    transition: color 0.2s ease;
-  }
+          .footer-item {
+            color: #1D1D1B;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            transition: color 0.2s ease;
+          }
 
-  .footer-item:hover { color: white; }
+          .footer-item:hover {
+            color: white;
+          }
 
-  .social-icons {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+          .social-icons {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
 
-  .social-icons li a {
-    font-size: 13px;
-    color: #1D1D1B;
-    text-decoration: none;
-  }
+          .social-icons li a {
+            font-size: 13px;
+            color: #1D1D1B;
+            text-decoration: none;
+          }
 
-  .social-icons li a:hover { color: #F29100; }
+          .social-icons li a:hover {
+            color: #F29100;
+          }
 
-  .download-apps img {
-    width: 160px;
-    max-width: 100%;
-  }
+          .download-apps img {
+            width: 160px;
+            max-width: 100%;
+          }
 
-  @media (max-width: 480px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .download-apps img {
-      width: 140px;
-    }
-  }
-  `}
+          .disclaimer {
+            font-size: 11px;
+            color: #1D1D1B;
+            margin-top: 10px;
+            opacity: 0.9;
+          }
+
+          @media (max-width: 480px) {
+            .footer-grid {
+              grid-template-columns: 1fr;
+              text-align: center;
+            }
+            .download-apps img {
+              width: 140px;
+            }
+          }
+        `}
       </style>
 
       <footer className="footer-wrapper">
@@ -96,7 +107,7 @@ export default function Footer() {
             <Link to="/store" className="footer-item">HealthYz Store</Link>
           </div>
 
-          {/* Column 3 - Legal */}
+          {/* Column 3 */}
           <div>
             <h4 className="footer-title">Legal</h4>
             <Link to="/terms" className="footer-item">Terms & Conditions</Link>
@@ -105,14 +116,14 @@ export default function Footer() {
             <Link to="/shipping-policy" className="footer-item">Shipping Policy</Link>
           </div>
 
-          {/* Column 4 - Social */}
+          {/* Column 4 */}
           <div>
             <h4 className="footer-title">Social</h4>
             <ul className="social-icons">
-              <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-              <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-              <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-              <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
+              <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
+              <li><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a></li>
+              <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
             </ul>
           </div>
 
@@ -138,17 +149,22 @@ export default function Footer() {
             HealthYz
           </h2>
 
-          {/* Required by Cashfree */}
+          {/* 18+ Disclaimer */}
+          <p className="disclaimer">
+            HealthYz provides health & wellness services. Content is intended for individuals aged 18 and above.
+          </p>
+
+          {/* Proprietorship Info */}
           <p
             style={{
-              marginTop: "4px",
+              marginTop: "6px",
               fontSize: "12px",
               color: "#1D1D1B",
             }}
           >
-           Powered by Tamilnadu Medicals
-(Registered Proprietorship MSME Number UDYAM-TN-23-0055751)
-
+            Powered by Tamilnadu Medicals  
+            <br />
+            (Registered Proprietorship • UDYAM-TN-23-0055751)
           </p>
         </div>
       </footer>
