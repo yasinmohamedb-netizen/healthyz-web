@@ -90,7 +90,7 @@ export default function Footer() {
 
       <footer className="footer-wrapper">
         <div className="footer-grid">
-          
+
           {/* Column 1 */}
           <div>
             <h4 className="footer-title">Healthyz</h4>
@@ -102,9 +102,15 @@ export default function Footer() {
           {/* Column 2 */}
           <div>
             <h4 className="footer-title">Services</h4>
-            <Link to="/wellness-trainers" className="footer-item">Personal Trainers</Link>
-            <Link to="/wellness-programs" className="footer-item">Wellness Programs</Link>
-            <Link to="/store" className="footer-item">HealthYz Store</Link>
+            <Link to="/home-care-services" className="footer-item">
+              Home Care Services
+            </Link>
+            <Link to="/wellness-trainers" className="footer-item">
+              Personal Trainers
+            </Link>
+            <Link to="/explore" className="footer-item">
+              HealthYz Store
+            </Link>
           </div>
 
           {/* Column 3 */}
@@ -149,12 +155,10 @@ export default function Footer() {
             HealthYz
           </h2>
 
-          {/* 18+ Disclaimer */}
           <p className="disclaimer">
             HealthYz provides health & wellness services. Content is intended for individuals aged 18 and above.
           </p>
 
-          {/* Proprietorship Info */}
           <p
             style={{
               marginTop: "6px",

@@ -46,12 +46,12 @@ export default function ExploreScreen() {
   const [category, setCategory] = useState("all");
 
   const categories = [
-    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/WellnessHome.png" },
-    { id: "beauty", name: "Beauty" },
-    { id: "sexual", name: "Sexual Wellness" },
-    { id: "babycare", name: "Baby Care" },
-    // { id: "medicines", name: "Medicines" },
-    // { id: "surgical", name: "Surgical" },
+    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/fitness.jpg" },
+    { id: "beauty", name: "Beauty", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/beautyproducts.jpg" },
+    { id: "sexual", name: "Sexual Wellness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/sexual+wellness.jpg" },
+    { id: "babycare", name: "Baby Care", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/babycare.jpg" },
+    { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/medicineproducts.jpg" },
+     { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/surgicalproducs.jpg" },
   ];
 
   // Load Promo Banners
@@ -79,9 +79,9 @@ export default function ExploreScreen() {
           "/gym/products",
           "/beauty/products",
           "/babycare/products",
-          // "/medicines/products",
+          "/medicines/products",
           "/sexual/products",
-          // "/surgical/products",
+          "/surgical/products",
         ];
 
         const responses = await Promise.all(

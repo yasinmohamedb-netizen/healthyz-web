@@ -87,12 +87,12 @@ export default function HomeScreen() {
   // E-COMMERCE CATEGORIES
   // ------------------------------------
   const categories = [
-    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    { id: "beauty", name: "Beauty", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    { id: "sexual", name: "Sexual Wellness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    { id: "babycare", name: "Baby Care", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    // { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
-    // { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/ecmommerce.jpg" },
+    { id: "gym", name: "Fitness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/fitness.jpg" },
+    { id: "beauty", name: "Beauty", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/beautyproducts.jpg" },
+    { id: "sexual", name: "Sexual Wellness", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/sexual+wellness.jpg" },
+    { id: "babycare", name: "Baby Care", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/babycare.jpg" },
+    { id: "medicines", name: "Medicines", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/medicineproducts.jpg" },
+     { id: "surgical", name: "Surgical", image: "https://productimagestesting.s3.ap-south-1.amazonaws.com/surgicalproducs.jpg" },
   ];
 
   const filteredCategories = categories.filter((c) =>

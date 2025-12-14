@@ -391,7 +391,7 @@ textarea:focus {
 
 .promo-item {
   min-width: 92%;
-  height: 260px;
+  height: 340px;
   object-fit: cover;
   border-radius: var(--border-radius-md);
   scroll-snap-align: start;

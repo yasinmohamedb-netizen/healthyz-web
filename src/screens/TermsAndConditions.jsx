@@ -97,13 +97,28 @@ export default function TermsAndConditions() {
             clinical procedures, or licensed healthcare services.
           </p>
 
-          <SectionTitle title="3. User Accounts" />
+          <SectionTitle title="3. Sale of Medicines & Restricted Drugs" />
+          <p className="terms-text">
+            HealthYz does <strong>not</strong> sell prescription medicines classified
+            under <strong>Schedule H, Schedule H1, or Schedule X</strong> as defined
+            by the Drugs and Cosmetics Act, 1940 and its associated rules.
+            <br /><br />
+            The platform offers only <strong>over-the-counter (OTC) medicines</strong>,
+            wellness products, health supplements, and general health-related items
+            that do not require a prescription for purchase.
+            <br /><br />
+            HealthYz does not facilitate the sale, distribution, or delivery of
+            restricted or controlled drugs and does not engage in online pharmacy
+            services involving prescription-only medications.
+          </p>
+
+          <SectionTitle title="4. User Accounts" />
           <p className="terms-text">
             Users must create an account with accurate information. You are
             responsible for maintaining the confidentiality of your login details.
           </p>
 
-          <SectionTitle title="4. Non-Medical Disclaimer" />
+          <SectionTitle title="5. Non-Medical Disclaimer" />
           <p className="terms-text">
             HealthYz does not provide medical diagnosis, treatment, or emergency
             care. Any wellness or home assistance services offered are general,
@@ -111,28 +126,28 @@ export default function TermsAndConditions() {
             should consult a qualified healthcare professional independently.
           </p>
 
-          <SectionTitle title="5. Payments & Refunds" />
+          <SectionTitle title="6. Payments & Refunds" />
           <p className="terms-text">
             Payments are processed securely through third-party payment gateways.
             Refunds are governed by our Cancellation & Refund Policy, applicable
             mainly to product orders or select service situations as described.
           </p>
 
-          <SectionTitle title="6. User Conduct" />
+          <SectionTitle title="7. User Conduct" />
           <p className="terms-text">
             You agree not to misuse the platform, engage in fraudulent activity,
             disrupt services, or violate applicable laws. Such actions may result
             in account suspension or termination.
           </p>
 
-          <SectionTitle title="7. Privacy" />
+          <SectionTitle title="8. Privacy" />
           <p className="terms-text">
             Your personal information is handled in accordance with our Privacy
             Policy. By using HealthYz, you consent to data practices described in
             that policy.
           </p>
 
-          <SectionTitle title="8. Limitation of Liability" />
+          <SectionTitle title="9. Limitation of Liability" />
           <p className="terms-text">
             HealthYz is not liable for indirect, incidental, or consequential
             damages arising from the use of our app, website, or services. Product
@@ -140,25 +155,25 @@ export default function TermsAndConditions() {
             manufacturers.
           </p>
 
-          <SectionTitle title="9. Modifications to Services" />
+          <SectionTitle title="10. Modifications to Services" />
           <p className="terms-text">
             We may add, modify, or discontinue any features or services at any
             time without prior notice.
           </p>
 
-          <SectionTitle title="10. Termination" />
+          <SectionTitle title="11. Termination" />
           <p className="terms-text">
             Users may delete their accounts at any time. HealthYz may terminate
             accounts that violate these Terms.
           </p>
 
-          <SectionTitle title="11. Changes to Terms" />
+          <SectionTitle title="12. Changes to Terms" />
           <p className="terms-text">
             These Terms may be updated periodically. Continued use of the platform
             after updates means acceptance of the revised Terms.
           </p>
 
-          <SectionTitle title="12. Contact Us" />
+          <SectionTitle title="13. Contact Us" />
           <p className="terms-text">
             For questions or concerns, contact us at:<br />
             <strong>hello@healthyz.co</strong>
