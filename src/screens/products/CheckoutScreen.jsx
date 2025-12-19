@@ -336,10 +336,10 @@ export default function CheckoutScreen() {
             </div>
           )}
 
-          <div className="summary-line">
-            <span>Tax</span>
-            <span>₹{tax.toFixed(2)}</span>
-          </div>
+<div className="summary-line tax-inclusive">
+  <span>Inclusive of all taxes</span>
+</div>
+
 
           {discount > 0 && (
             <div className="summary-line discount-line">
