@@ -1,6 +1,6 @@
 // =======================================
 // src/screens/products/ProductDetail.jsx
-// FINAL PRODUCTION VERSION (UPDATED)
+// FIXED: refetch on id change, similar navigation
 // =======================================
 
 import React, { useState, useEffect, useContext } from "react";
@@ -9,7 +9,7 @@ import { CartContext } from "../../context/CartContext";
 import { BASE_URL } from "../../context/config";
 import "./ProductDetail.css";
 
-import ProductSEO from "../../seo/ProductSEO";   // <-- UPDATED SEO FILE
+import ProductSEO from "../../seo/ProductSEO";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -36,6 +36,12 @@ export default function ProductDetail() {
   // FETCH SELECTED PRODUCT BY ID
   // ------------------------------------
   useEffect(() => {
+    // reset state on ID change so UI clearly reloads
+    setProduct(null);
+    setQuantity(1);
+    setShowFullDescription(false);
+    window.scrollTo(0, 0);
+
     const load = async () => {
       try {
         for (const url of endpoints) {
@@ -55,7 +61,7 @@ export default function ProductDetail() {
     };
 
     load();
-  }, [id]);
+  }, [id]); // 👈 critical so it runs for each similar click
 
   // ------------------------------------
   // LOAD ALL PRODUCTS FOR SIMILAR LIST
@@ -88,13 +94,11 @@ export default function ProductDetail() {
 
   return (
     <div className="pd-wrapper">
-      
-      {/* ⭐ SEO SECTION */}
-      <ProductSEO product={product} />  
+      {/* SEO */}
+      <ProductSEO product={product} />
 
       {/* MAIN PRODUCT SECTION */}
       <div className="pd-main">
-
         {/* LEFT SIDE IMAGES */}
         <div className="pd-left">
           <div className="pd-image-box">
@@ -143,7 +147,9 @@ export default function ProductDetail() {
               {product.description?.length > 200 && (
                 <button
                   className="pd-readmore"
-                  onClick={() => setShowFullDescription(!showFullDescription)}
+                  onClick={() =>
+                    setShowFullDescription(!showFullDescription)
+                  }
                 >
                   {showFullDescription ? "Show Less" : "Read More"}
                 </button>
@@ -175,22 +181,20 @@ export default function ProductDetail() {
 
       <div className="pd-similar-grid">
         {similar.map((item) => {
-          const price = Number(item.price);
-          const discount = item.discount || 0;
-          const final = Math.round(price - (price * discount) / 100);
+          const p = Number(item.price);
+          const d = item.discount || 0;
+          const final = Math.round(p - (p * d) / 100);
           const img = item.images?.[0] || item.image;
 
           return (
             <div
               key={item._id}
               className="sim-card"
-              onClick={() => navigate(`/product/${item._id}`)}  // <-- FIXED ROUTE
+              onClick={() => navigate(`/product-details/${item._id}`)} // 👈 same route as App.jsx
             >
               <div className="sim-img-box">
                 <img src={img} alt={item.name} />
-                {discount > 0 && (
-                  <span className="sim-discount">{discount}% OFF</span>
-                )}
+                {d > 0 && <span className="sim-discount">{d}% OFF</span>}
               </div>
 
               <div className="sim-info">
@@ -198,7 +202,7 @@ export default function ProductDetail() {
 
                 <div className="sim-price-row">
                   <span className="sim-final">₹{final}</span>
-                  {discount > 0 && <span className="sim-cut">₹{price}</span>}
+                  {d > 0 && <span className="sim-cut">₹{p}</span>}
                 </div>
 
                 <button
@@ -211,7 +215,7 @@ export default function ProductDetail() {
                       price: final,
                       quantity: 1,
                       image: img,
-                      discount,
+                      discount: d,
                     });
                     navigate("/cart");
                   }}
