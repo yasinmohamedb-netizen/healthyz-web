@@ -22,18 +22,39 @@ export default function CartScreen() {
 
   const total = subtotal + totalTax;
 
+  // ============================
+  // EMPTY CART UI
+  // ============================
   if (!cartItems || cartItems.length === 0) {
     return (
-      <div className="cart-empty">
-        <p>Your cart is empty</p>
-        <button onClick={() => navigate("/explore")}>Shop Now</button>
+      <div className="cart-empty-wrapper">
+        <div className="cart-empty-card">
+          <img
+            className="cart-empty-illustration"
+            src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png"
+            alt="Empty cart"
+          />
+          <h2>Your cart is empty</h2>
+          <p className="cart-empty-text">
+            Looks like you haven&apos;t added anything yet. Discover healthy
+            products curated just for you.
+          </p>
+          <button
+            className="cart-empty-btn"
+            onClick={() => navigate("/explore")}
+          >
+            Start Shopping
+          </button>
+        </div>
       </div>
     );
   }
 
+  // ============================
+  // NORMAL CART UI
+  // ============================
   return (
     <div className="cart-page">
-
       {/* Left Side – Items */}
       <div className="cart-left">
         <h1 className="cart-title">Cart</h1>
@@ -46,7 +67,6 @@ export default function CartScreen() {
         {cartItems.map((item) => {
           const price = item.price ?? item.originalPrice ?? 0;
           const quantity = item.quantity ?? 1;
-          const taxPercent = item.tax ?? 0;
 
           return (
             <div key={item.id} className="cart-row">
@@ -85,9 +105,10 @@ export default function CartScreen() {
             <span>₹{subtotal.toFixed(2)}</span>
           </div>
 
+          {/* inclusive text instead of separate tax line */}
           <div className="summary-row">
-            <span>Tax</span>
-            <span>₹{totalTax.toFixed(2)}</span>
+            <span>Inclusive of all taxes</span>
+            <span></span>
           </div>
 
           <hr />

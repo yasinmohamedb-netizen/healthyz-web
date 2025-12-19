@@ -279,13 +279,14 @@ export default function ExploreScreen() {
                         onClick={(e) => {
                           e.stopPropagation();
                           addToCart({
-                            id: item._id,
+                            id: item._id,              // UI key
+                            productId: item._id,       // 🔥 BACKEND key
                             name: item.name,
                             price: finalPrice,
                             image: img,
                             quantity: 1,
-                            discount: off,
                           });
+                          
                           navigate("/cart");
                         }}
                       >
