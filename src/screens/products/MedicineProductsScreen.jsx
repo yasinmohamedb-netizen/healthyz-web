@@ -216,22 +216,29 @@ export default function MedicineProductsScreen() {
                     </div>
 
                     <button
-                      className="add-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart({
-                          id: item._id,
-                          name: item.name,
-                          price: final,
-                          image: img,
-                          quantity: 1,
-                          discount: discountVal,
-                        });
-                        navigate("/cart");
-                      }}
-                    >
-                      ADD TO CART
-                    </button>
+  className="add-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    addToCart({
+      productId: item._id,        // ✅ REQUIRED
+      name: item.name,
+      finalItemPrice: final,      // ✅ REQUIRED
+      image: img,
+      quantity: 1,
+      variantId: null,
+      variantLabel: null,
+    });
+
+    // allow state update before navigation
+    setTimeout(() => {
+      navigate("/cart");
+    }, 0);
+  }}
+>
+  ADD TO CART
+</button>
+
                   </div>
                 </div>
               );

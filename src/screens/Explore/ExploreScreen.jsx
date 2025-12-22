@@ -275,23 +275,26 @@ export default function ExploreScreen() {
                       </div>
 
                       <button
-                        className="add-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToCart({
-                            id: item._id,              // UI key
-                            productId: item._id,       // 🔥 BACKEND key
-                            name: item.name,
-                            price: finalPrice,
-                            image: img,
-                            quantity: 1,
-                          });
-                          
-                          navigate("/cart");
-                        }}
-                      >
-                        ADD TO CART
-                      </button>
+  className="add-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    addToCart({
+      productId: item._id,
+      name: item.name,
+      finalItemPrice: finalPrice, // ✅ REQUIRED
+      image: img,
+      quantity: 1,
+      variantId: null,
+      variantLabel: null,
+    });
+
+    navigate("/cart");
+  }}
+>
+  ADD TO CART
+</button>
+
                     </div>
                   </div>
                 );

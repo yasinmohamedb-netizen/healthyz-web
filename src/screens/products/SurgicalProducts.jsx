@@ -209,23 +209,29 @@ export default function SurgicalProductsScreen() {
                     </div>
 
                     <button
-                      className="add-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart({
-                          id: item._id,
-                          name: item.name,
-                          price: finalPrice,
-                          image: img,
-                          quantity: 1,
-                          discount: d,
-                          tax: item.tax || 0,
-                        });
-                        navigate("/cart");
-                      }}
-                    >
-                      ADD TO CART
-                    </button>
+  className="add-btn"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    addToCart({
+      productId: item._id,            // ✅ REQUIRED
+      name: item.name,
+      finalItemPrice: finalPrice,     // ✅ REQUIRED
+      image: img,
+      quantity: 1,
+      variantId: null,
+      variantLabel: null,
+    });
+
+    // let state commit before route change
+    setTimeout(() => {
+      navigate("/cart");
+    }, 0);
+  }}
+>
+  ADD TO CART
+</button>
+
                   </div>
                 </div>
               );
