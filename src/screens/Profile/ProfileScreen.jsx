@@ -152,14 +152,14 @@ export default function ProfileScreen() {
         />
         <h2 className="left-quote">“Caring for you, every step of the way.”</h2>
       
-        {/* <div className="profile-section">
+        { <div className="profile-section">
           <div className="section-header">
             <h3>Send Your Prescription</h3>
           </div>
           <button className="whatsapp-btn" onClick={sendWhatsApp}>
             WhatsApp
           </button>
-        </div> */}
+        </div> }
       </div>
 
       {/* ---------- RIGHT SECTION (Profile details + Partner box) ---------- */}

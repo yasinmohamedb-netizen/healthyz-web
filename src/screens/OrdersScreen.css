@@ -1,0 +1,148 @@
+/* ================================
+   ORDER HISTORY PAGE
+================================ */
+
+.os-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  
+  .os-wrapper h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* ================================
+     EMPTY STATE
+  ================================ */
+  
+  .os-wrapper p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  
+  .os-wrapper button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 18px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .os-wrapper button:hover {
+    background: #1d4ed8;
+  }
+  
+  /* ================================
+     ORDER GRID
+  ================================ */
+  
+  .order-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* ================================
+     ORDER HEADER
+  ================================ */
+  
+  .order-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .order-head span:first-child {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .order-head span:last-child {
+    font-size: 12px;
+    font-weight: 600;
+    color: #047857;
+    background: #d1fae5;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  
+  /* ================================
+     ORDER ITEMS
+  ================================ */
+  
+  .order-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .order-item:first-of-type {
+    border-top: none;
+  }
+  
+  .order-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f3f4f6;
+  }
+  
+  .order-item strong {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .order-item p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: #555;
+  }
+  
+  /* Variant label */
+  .order-item p:nth-child(2) {
+    font-size: 12px;
+    color: #2563eb;
+  }
+  
+  /* ================================
+     ORDER TOTAL
+  ================================ */
+  
+  .order-total {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed #e5e7eb;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 700;
+    color: #065f46;
+  }
+  
+  /* ================================
+     RESPONSIVE
+  ================================ */
+  
+  @media (max-width: 768px) {
+    .order-item {
+      flex-direction: column;
+    }
+  
+    .order-total {
+      text-align: left;
+    }
+  }
+  

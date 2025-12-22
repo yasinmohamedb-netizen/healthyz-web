@@ -1,30 +1,37 @@
 // src/screens/products/CartScreen.jsx
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import "./CartScreen.css";
 
 export default function CartScreen() {
   const navigate = useNavigate();
-  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
-    useContext(CartContext);
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+  } = useContext(CartContext);
 
-  const subtotal = cartItems.reduce((sum, item) => {
-    const price = item.price ?? item.originalPrice ?? 0;
-    return sum + price * (item.quantity ?? 1);
-  }, 0);
+  // ==============================
+  // SAFE PRICE CALCULATION
+  // ==============================
+  const subtotal = useMemo(() => {
+    return cartItems.reduce((sum, item) => {
+      const price = Number(item.finalItemPrice);
+      const qty = Number(item.quantity) || 1;
 
-  const totalTax = cartItems.reduce((sum, item) => {
-    const price = item.price ?? item.originalPrice ?? 0;
-    const taxPercentage = item.tax ?? 0;
-    return sum + ((price * taxPercentage) / 100) * (item.quantity ?? 1);
-  }, 0);
+      if (!Number.isFinite(price) || price <= 0) return sum;
 
-  const total = subtotal + totalTax;
+      return sum + price * qty;
+    }, 0);
+  }, [cartItems]);
 
-  // ============================
-  // EMPTY CART UI
-  // ============================
+  const total = subtotal; // server will handle tax, delivery, discount
+
+  // ==============================
+  // EMPTY CART
+  // ==============================
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className="cart-empty-wrapper">
@@ -50,43 +57,87 @@ export default function CartScreen() {
     );
   }
 
-  // ============================
-  // NORMAL CART UI
-  // ============================
+  // ==============================
+  // RENDER
+  // ==============================
   return (
     <div className="cart-page">
-      {/* Left Side – Items */}
+      {/* LEFT – CART ITEMS */}
       <div className="cart-left">
         <h1 className="cart-title">Cart</h1>
 
         <div className="cart-section-header">
           <span className="circle-number">1</span>
-          <p>Review products’ set</p>
+          <p>Review products</p>
         </div>
 
         {cartItems.map((item) => {
-          const price = item.price ?? item.originalPrice ?? 0;
-          const quantity = item.quantity ?? 1;
+          const price = Number(item.finalItemPrice);
+          const quantity = Number(item.quantity) || 1;
+          const lineTotal =
+            Number.isFinite(price) && price > 0
+              ? price * quantity
+              : 0;
 
           return (
-            <div key={item.id} className="cart-row">
-              <img src={item.image} alt={item.name} className="cart-img" />
+            <div
+              key={`${item.productId}_${item.variantId || "base"}`}
+              className="cart-row"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="cart-img"
+              />
 
               <div className="cart-info">
                 <p className="cart-name">{item.name}</p>
 
+                {item.variantLabel && (
+                  <p className="cart-variant">
+                    Option: {item.variantLabel}
+                  </p>
+                )}
+
                 <div className="cart-qty-box">
-                  <button onClick={() => decreaseQuantity(item.id)}>−</button>
+                  <button
+                    onClick={() =>
+                      decreaseQuantity(
+                        item.productId,
+                        item.variantId
+                      )
+                    }
+                  >
+                    −
+                  </button>
+
                   <span>{quantity}</span>
-                  <button onClick={() => increaseQuantity(item.id)}>+</button>
+
+                  <button
+                    onClick={() =>
+                      increaseQuantity(
+                        item.productId,
+                        item.variantId
+                      )
+                    }
+                  >
+                    +
+                  </button>
                 </div>
               </div>
 
-              <p className="cart-price">₹{price}</p>
+              <p className="cart-price">
+                ₹{lineTotal.toFixed(2)}
+              </p>
 
               <button
                 className="cart-remove"
-                onClick={() => removeFromCart(item.id)}
+                onClick={() =>
+                  removeFromCart(
+                    item.productId,
+                    item.variantId
+                  )
+                }
               >
                 🗑️
               </button>
@@ -95,17 +146,16 @@ export default function CartScreen() {
         })}
       </div>
 
-      {/* Right Side – Summary */}
+      {/* RIGHT – SUMMARY */}
       <div className="cart-right">
         <div className="summary-box">
-          <h3>Selected offer summary</h3>
+          <h3>Order summary</h3>
 
           <div className="summary-row">
-            <span>Proposed total</span>
+            <span>Subtotal</span>
             <span>₹{subtotal.toFixed(2)}</span>
           </div>
 
-          {/* inclusive text instead of separate tax line */}
           <div className="summary-row">
             <span>Inclusive of all taxes</span>
             <span></span>
@@ -120,11 +170,7 @@ export default function CartScreen() {
 
           <button
             className="checkout-btn"
-            onClick={() =>
-              navigate("/checkout", {
-                state: { cartItems, subtotal, totalTax, total },
-              })
-            }
+            onClick={() => navigate("/checkout")}
           >
             Checkout
           </button>

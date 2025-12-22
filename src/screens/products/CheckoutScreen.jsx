@@ -1,6 +1,4 @@
-// src/screens/products/CheckoutScreen.jsx
-
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
@@ -21,9 +19,7 @@ export default function CheckoutScreen() {
   const [promoCode, setPromoCode] = useState("");
   const [promoMessage, setPromoMessage] = useState("");
 
-  // start as null so UI can show "Calculating..."
   const [subtotal, setSubtotal] = useState(null);
-  const [tax, setTax] = useState(null);
   const [discount, setDiscount] = useState(0);
   const [deliveryCharge, setDeliveryCharge] = useState(null);
   const [extraCharges, setExtraCharges] = useState({});
@@ -31,7 +27,36 @@ export default function CheckoutScreen() {
 
   const [loading, setLoading] = useState(false);
 
-  // load Razorpay script
+  // ==================================
+  // FRONTEND FALLBACK SUBTOTAL
+  // ==================================
+  const frontendSubtotal = useMemo(() => {
+    return cartItems.reduce((sum, item) => {
+      const price = Number(item.finalItemPrice);
+      const qty = Number(item.quantity) || 1;
+      if (!Number.isFinite(price) || price <= 0) return sum;
+      return sum + price * qty;
+    }, 0);
+  }, [cartItems]);
+
+  // ==================================
+  // SAFE TOTAL (CRITICAL FIX)
+  // ==================================
+  const safeTotal = useMemo(() => {
+    if (Number.isFinite(grandTotal) && grandTotal > 0) {
+      return grandTotal;
+    }
+
+    return (
+      frontendSubtotal +
+      (deliveryCharge || 0) -
+      (discount || 0)
+    );
+  }, [grandTotal, frontendSubtotal, deliveryCharge, discount]);
+
+  // ==================================
+  // LOAD RAZORPAY SCRIPT
+  // ==================================
   useEffect(() => {
     const s = document.createElement("script");
     s.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -39,7 +64,9 @@ export default function CheckoutScreen() {
     document.body.appendChild(s);
   }, []);
 
-  // load user default address + mobile
+  // ==================================
+  // DEFAULT ADDRESS
+  // ==================================
   useEffect(() => {
     if (userData) {
       const savedDefault =
@@ -51,61 +78,66 @@ export default function CheckoutScreen() {
     }
   }, [userData]);
 
-  // listen for address update callback
+  // ==================================
+  // ADDRESS CALLBACK
+  // ==================================
   useEffect(() => {
     setAddressCallback((newAddress) => setAddress(newAddress));
   }, []);
 
-  // ================================
-  // PRICE CALCULATION — BACKEND
-  // ================================
+  // ==================================
+  // BACKEND PRICE CALCULATION
+  // ==================================
   const updatePriceFromBackend = async (promoInput = promoCode) => {
     try {
       if (!cartItems || cartItems.length === 0) return;
-  
+
       const resp = await axios.post(
         `${BASE_URL}/checkout-price/calculate`,
         {
           items: cartItems.map((i) => ({
-            productId: i.productId || i._id || i.id,
-            quantity: i.quantity || 1,
-            price: i.price, // send final price
+            productId: i.productId || i.id,
+            variantId: i.variantId || null,
+            quantity: Number(i.quantity) || 1,
+            finalItemPrice: Number(i.finalItemPrice),
           })),
           promoCode: promoInput || "",
           userId: userData?._id,
         }
       );
-  
+
       const data = resp.data;
+
       setSubtotal(data.subtotal);
-      setTax(data.tax);
       setDeliveryCharge(data.deliveryCharge);
       setDiscount(data.discount);
       setGrandTotal(data.grandTotal);
       setPromoMessage(data.promoMessage || "");
       setExtraCharges(data.extraCharges || {});
     } catch (err) {
-      console.log("PRICE CALCULATION ERROR:", err.response?.data || err);
+      console.error(
+        "PRICE CALCULATION ERROR:",
+        err.response?.data || err
+      );
     }
   };
-  
-  
-  
 
-  // load price on first render
+  // ==================================
+  // INITIAL CALCULATION
+  // ==================================
   useEffect(() => {
-    if (cartItems.length > 0) updatePriceFromBackend();
-  }, [cartItems]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (cartItems.length > 0) {
+      updatePriceFromBackend();
+    }
+  }, [cartItems]); // eslint-disable-line
 
-  // ================================
-  // PROMO CODE HANDLING
-  // ================================
+  // ==================================
+  // PROMO HANDLERS
+  // ==================================
   const handlePromoChange = (value) => {
     setPromoCode(value);
-    // reset promo instantly
     setDiscount(0);
     setPromoMessage("");
-    // refresh totals without promo
     updatePriceFromBackend("");
   };
 
@@ -114,19 +146,18 @@ export default function CheckoutScreen() {
     updatePriceFromBackend(promoCode);
   };
 
-  // ================================
+  // ==================================
   // PAYMENT
-  // ================================
+  // ==================================
   const handleOnlinePayment = async () => {
     if (!address) return alert("Select an address");
     if (!mobile) return alert("Enter mobile number");
-    if (!grandTotal) return alert("Price calculation pending");
 
     setLoading(true);
 
     try {
       const resp = await axios.post(`${BASE_URL}/payment/order`, {
-        totalAmount: grandTotal,
+        totalAmount: safeTotal,
         type: "order",
       });
 
@@ -145,39 +176,38 @@ export default function CheckoutScreen() {
           contact: mobile,
         },
         theme: { color: "#3B82F6" },
-        handler: async function (response) {
+        handler: async (response) => {
           try {
-            const verify = await axios.post(`${BASE_URL}/payment/verify`, {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              orderData: {
-                firebaseUid: userData?.firebaseUid,
-                items: cartItems.map((i) => ({
-                  productId: i.id || i._id || i.productId,
-                  name: i.name,
-                  quantity: i.quantity,
-                  price: i.price,
-                  image: i.image,
-                })),
-                totalAmount: grandTotal,
-                deliveryAddress: address,
-                mobile,
-                instructions,
-                paymentMethod: "Online Payment",
-                paymentId: response.razorpay_payment_id,
-                promoCode,
-              },
-              totalAmount: grandTotal,
-              type: "order",
-            });
+            const verify = await axios.post(
+              `${BASE_URL}/payment/verify`,
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                orderData: {
+                  firebaseUid: userData?.firebaseUid,
+                  items: cartItems,
+                  totalAmount: safeTotal,
+                  deliveryAddress: address,
+                  mobile,
+                  instructions,
+                  paymentMethod: "Online Payment",
+                  paymentId: response.razorpay_payment_id,
+                  promoCode,
+                },
+                totalAmount: safeTotal,
+                type: "order",
+              }
+            );
 
             if (verify.data.success) {
               clearCart();
-              navigate("/order-success", { state: verify.data.order });
+              navigate("/order-success", {
+                state: verify.data.order,
+              });
             }
           } catch (err) {
-            console.log("VERIFY ERROR:", err.response?.data || err);
+            console.error("VERIFY ERROR:", err);
             alert("Order verification failed");
           }
         },
@@ -186,19 +216,18 @@ export default function CheckoutScreen() {
         },
       };
 
-      // open Razorpay widget
       new window.Razorpay(options).open();
     } catch (err) {
-      console.log("PAYMENT ERROR:", err.response?.data || err);
+      console.error("PAYMENT ERROR:", err);
       alert("Payment Error");
     }
 
     setLoading(false);
   };
 
-  // ================================
+  // ==================================
   // EMPTY CART
-  // ================================
+  // ==================================
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className="checkout-empty">
@@ -208,16 +237,14 @@ export default function CheckoutScreen() {
     );
   }
 
-  // ================================
-  // UI
-  // ================================
+  // ==================================
+  // RENDER
+  // ==================================
   return (
     <div className="checkout-container">
-      {/* LEFT */}
       <div className="checkout-left">
         <h1 className="checkout-title">Checkout</h1>
 
-        {/* SHIPPING */}
         <div className="checkout-card">
           <h3>Shipping Information</h3>
 
@@ -229,15 +256,14 @@ export default function CheckoutScreen() {
             type="text"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
-            placeholder="Enter mobile number"
           />
 
           <label>Delivery Address *</label>
           {address ? (
             <>
               <textarea
-                className="checkout-textarea"
                 readOnly
+                className="checkout-textarea"
                 value={[
                   address.line1,
                   address.line2,
@@ -265,19 +291,16 @@ export default function CheckoutScreen() {
             </button>
           )}
 
-          <label>Order Instructions (Optional)</label>
+          <label>Order Instructions</label>
           <textarea
             className="checkout-textarea"
-            placeholder="Any instructions for delivery?"
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
           />
         </div>
 
-        {/* PROMO CODE */}
         <div className="checkout-card">
           <h3>Discount Code</h3>
-
           <div className="promo-row">
             <input
               type="text"
@@ -287,31 +310,45 @@ export default function CheckoutScreen() {
             />
             <button onClick={applyPromo}>Apply</button>
           </div>
-
-          {promoMessage && <p className="promo-success">✓ {promoMessage}</p>}
+          {promoMessage && (
+            <p className="promo-success">✓ {promoMessage}</p>
+          )}
         </div>
       </div>
 
-      {/* RIGHT */}
       <div className="checkout-right">
         <div className="checkout-summary">
           <h3>Review your cart</h3>
 
           {cartItems.map((item) => (
-            <div key={item.id || item._id} className="summary-item">
+            <div
+              key={`${item.productId || item.id}_${item.variantId || "base"}`}
+              className="summary-item"
+            >
               <img src={item.image} alt={item.name} />
               <div>
                 <p className="summary-name">{item.name}</p>
+                {item.variantLabel && (
+                  <p className="summary-variant">
+                    Option: {item.variantLabel}
+                  </p>
+                )}
                 <p className="summary-qty">{item.quantity}×</p>
               </div>
-              <span className="summary-price">₹{item.price}</span>
+              <span className="summary-price">
+                ₹{(item.finalItemPrice * item.quantity).toFixed(2)}
+              </span>
             </div>
           ))}
 
           <div className="summary-line">
             <span>Subtotal</span>
             <span>
-              {subtotal === null ? "Calculating..." : `₹${subtotal.toFixed(2)}`}
+              ₹
+              {(subtotal !== null && subtotal > 0
+                ? subtotal
+                : frontendSubtotal
+              ).toFixed(2)}
             </span>
           </div>
 
@@ -326,31 +363,6 @@ export default function CheckoutScreen() {
             </span>
           </div>
 
-          {extraCharges?.nightCharge > 0 && (
-            <div className="summary-line">
-              <span>Night Charge</span>
-              <span>₹{extraCharges.nightCharge}</span>
-            </div>
-          )}
-
-          {extraCharges?.packingCharge > 0 && (
-            <div className="summary-line">
-              <span>Packing Charge</span>
-              <span>₹{extraCharges.packingCharge}</span>
-            </div>
-          )}
-
-          {extraCharges?.festivalFee > 0 && (
-            <div className="summary-line">
-              <span>Festival Fee</span>
-              <span>₹{extraCharges.festivalFee}</span>
-            </div>
-          )}
-
-          <div className="summary-line tax-inclusive">
-            <span>Inclusive of all taxes</span>
-          </div>
-
           {discount > 0 && (
             <div className="summary-line discount-line">
               <span>Discount</span>
@@ -360,24 +372,16 @@ export default function CheckoutScreen() {
 
           <div className="summary-total">
             <span>Total</span>
-            <span>
-              {grandTotal === null
-                ? "Calculating..."
-                : `₹${grandTotal.toFixed(2)}`}
-            </span>
+            <span>₹{safeTotal.toFixed(2)}</span>
           </div>
 
           <button
             className="pay-btn"
-            disabled={loading || grandTotal === null}
+            disabled={loading}
             onClick={handleOnlinePayment}
           >
             {loading ? "Processing…" : "Pay Now"}
           </button>
-
-          <p className="secure-text">
-            🔒 Secure Checkout – Your payment details are safe
-          </p>
         </div>
       </div>
     </div>

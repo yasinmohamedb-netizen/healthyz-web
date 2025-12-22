@@ -1,14 +1,9 @@
-// =======================================
 // src/screens/products/ProductDetail.jsx
-// FIXED: refetch on id change, similar navigation
-// =======================================
-
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { BASE_URL } from "../../context/config";
 import "./ProductDetail.css";
-
 import ProductSEO from "../../seo/ProductSEO";
 
 export default function ProductDetail() {
@@ -20,8 +15,8 @@ export default function ProductDetail() {
   const [allProducts, setAllProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
 
-  // ALL PRODUCT ENDPOINTS
   const endpoints = [
     `${BASE_URL}/products`,
     `${BASE_URL}/gym/products`,
@@ -32,23 +27,22 @@ export default function ProductDetail() {
     `${BASE_URL}/sexual/products`,
   ];
 
-  // ------------------------------------
-  // FETCH SELECTED PRODUCT BY ID
-  // ------------------------------------
+  // ================================
+  // FETCH PRODUCT BY ID
+  // ================================
   useEffect(() => {
-    // reset state on ID change so UI clearly reloads
     setProduct(null);
     setQuantity(1);
+    setSelectedVariantIndex(0);
     setShowFullDescription(false);
     window.scrollTo(0, 0);
 
-    const load = async () => {
+    const loadProduct = async () => {
       try {
         for (const url of endpoints) {
           const res = await fetch(url);
           const data = await res.json();
           const arr = Array.isArray(data) ? data : data.data || [];
-
           const found = arr.find((p) => p._id === id);
           if (found) {
             setProduct(found);
@@ -56,26 +50,28 @@ export default function ProductDetail() {
           }
         }
       } catch (err) {
-        console.log("Product fetch error:", err);
+        console.error("Product fetch error:", err);
       }
     };
 
-    load();
-  }, [id]); // 👈 critical so it runs for each similar click
+    loadProduct();
+  }, [id]);
 
-  // ------------------------------------
-  // LOAD ALL PRODUCTS FOR SIMILAR LIST
-  // ------------------------------------
+  // ================================
+  // LOAD ALL PRODUCTS (SIMILAR)
+  // ================================
   useEffect(() => {
     fetch(`${BASE_URL}/products`)
       .then((res) => res.json())
       .then((data) => setAllProducts(Array.isArray(data) ? data : []))
-      .catch((err) => console.log("Similar products error:", err));
+      .catch((err) => console.error("Similar products error:", err));
   }, []);
 
   if (!product) return <div className="pd-loading">Loading...</div>;
 
-  // PRODUCT CALCULATIONS
+  // ================================
+  // IMAGES
+  // ================================
   const images =
     product.images?.length > 0
       ? product.images
@@ -83,30 +79,92 @@ export default function ProductDetail() {
       ? [product.image]
       : [];
 
-  const price = Number(product.price);
-  const discount = product.discount || 0;
-  const finalPrice = Math.round(price - price * (discount / 100));
+  // ================================
+  // VARIANT LOGIC
+  // ================================
+  const hasVariants =
+    Array.isArray(product.variants) && product.variants.length > 0;
 
-  // SIMILAR PRODUCTS FILTER
+  const selectedVariant = hasVariants
+    ? product.variants[selectedVariantIndex]
+    : null;
+
+  // ================================
+  // PRICE CALCULATION (SAFE)
+  // ================================
+  const basePrice = Number(
+    selectedVariant?.price ?? product.price
+  );
+
+  const discount = Number(
+    selectedVariant?.discount ?? product.discount ?? 0
+  );
+
+  const finalPrice =
+    Number.isFinite(basePrice) && basePrice > 0
+      ? Math.max(
+          1,
+          Math.round(basePrice - (basePrice * discount) / 100)
+        )
+      : null;
+
+  const isPriceValid =
+    Number.isFinite(finalPrice) && finalPrice > 0;
+
+  // ================================
+  // SIMILAR PRODUCTS
+  // ================================
   const similar = allProducts
-    .filter((p) => p.category === product.category && p._id !== product._id)
+    .filter(
+      (p) => p.category === product.category && p._id !== product._id
+    )
     .slice(0, 8);
 
+  // ================================
+  // ADD TO CART (GUARDED)
+  // ================================
+  const handleAddToCart = () => {
+    if (!isPriceValid) {
+      alert("Invalid product price. Please try again later.");
+      return;
+    }
+
+    const qty = Number(quantity) || 1;
+
+    addToCart({
+      productId: product._id,
+      name: product.name,
+      quantity: qty,
+      finalItemPrice: finalPrice, // 🔥 ALWAYS VALID
+      image: images[0],
+      variantId: selectedVariant?._id || null,
+      variantLabel: selectedVariant?.label || null,
+      variantPrice: selectedVariant
+        ? Number(selectedVariant.price)
+        : null,
+      variantDiscount: selectedVariant?.discount ?? null,
+    });
+
+    navigate("/cart");
+  };
+
+  // ================================
+  // RENDER
+  // ================================
   return (
     <div className="pd-wrapper">
-      {/* SEO */}
       <ProductSEO product={product} />
 
-      {/* MAIN PRODUCT SECTION */}
       <div className="pd-main">
-        {/* LEFT SIDE IMAGES */}
+        {/* LEFT */}
         <div className="pd-left">
           <div className="pd-image-box">
             <img src={images[0]} alt={product.name} />
-            {discount > 0 && <div className="pd-offer">{discount}% OFF</div>}
+            {discount > 0 && (
+              <div className="pd-offer">{discount}% OFF</div>
+            )}
           </div>
 
-          {/* THUMBNAILS */}
           <div className="pd-thumbs">
             {images.map((img, index) => (
               <img key={index} src={img} alt="Thumbnail" />
@@ -114,25 +172,55 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* RIGHT SIDE INFO */}
+        {/* RIGHT */}
         <div className="pd-right">
           <h1 className="pd-title">{product.name}</h1>
 
-          {/* PRICE ROW */}
+          {/* VARIANTS */}
+          {hasVariants && (
+            <div className="pd-variant-box">
+              <p className="pd-variant-title">Select Option</p>
+              <div className="pd-variant-row">
+                {product.variants.map((v, i) => (
+                  <button
+                    key={v._id || i}
+                    className={`pd-variant-btn ${
+                      selectedVariantIndex === i ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedVariantIndex(i)}
+                  >
+                    {v.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* PRICE */}
           <div className="pd-price-box">
-            {discount > 0 && <span className="pd-old-price">₹{price}</span>}
-            <span className="pd-final-price">₹{finalPrice}</span>
+            {discount > 0 && (
+              <span className="pd-old-price">₹{basePrice}</span>
+            )}
+            <span className="pd-final-price">
+              {isPriceValid ? `₹${finalPrice}` : "—"}
+            </span>
           </div>
 
-          {/* QUANTITY SELECTOR */}
+          {/* QUANTITY */}
           <div className="pd-qty-row">
             <span>Quantity</span>
             <div className="pd-qty-controls">
-              <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>
-                -
+              <button
+                onClick={() =>
+                  setQuantity((q) => (q > 1 ? q - 1 : 1))
+                }
+              >
+                −
               </button>
               <div>{quantity}</div>
-              <button onClick={() => setQuantity(quantity + 1)}>+</button>
+              <button onClick={() => setQuantity((q) => q + 1)}>
+                +
+              </button>
             </div>
           </div>
 
@@ -143,7 +231,6 @@ export default function ProductDetail() {
               {showFullDescription
                 ? product.description
                 : product.description?.slice(0, 200)}
-
               {product.description?.length > 200 && (
                 <button
                   className="pd-readmore"
@@ -151,27 +238,24 @@ export default function ProductDetail() {
                     setShowFullDescription(!showFullDescription)
                   }
                 >
-                  {showFullDescription ? "Show Less" : "Read More"}
+                  {showFullDescription
+                    ? "Show Less"
+                    : "Read More"}
                 </button>
               )}
             </p>
           </div>
 
-          {/* ADD TO CART BUTTON */}
+          {/* ADD TO CART */}
           <button
             className="pd-add-btn"
-            onClick={() => {
-              addToCart({
-                id: product._id,
-                name: product.name,
-                price: finalPrice,
-                quantity,
-                image: images[0],
-              });
-              navigate("/cart");
-            }}
+            onClick={handleAddToCart}
+            disabled={!isPriceValid}
           >
-            Add to Cart • ₹{finalPrice * quantity}
+            Add to Cart • ₹
+            {isPriceValid
+              ? finalPrice * (Number(quantity) || 1)
+              : 0}
           </button>
         </div>
       </div>
@@ -182,46 +266,34 @@ export default function ProductDetail() {
       <div className="pd-similar-grid">
         {similar.map((item) => {
           const p = Number(item.price);
-          const d = item.discount || 0;
-          const final = Math.round(p - (p * d) / 100);
+          const d = Number(item.discount) || 0;
+          const final =
+            Number.isFinite(p) && p > 0
+              ? Math.round(p - (p * d) / 100)
+              : 0;
           const img = item.images?.[0] || item.image;
 
           return (
             <div
               key={item._id}
               className="sim-card"
-              onClick={() => navigate(`/product-details/${item._id}`)} // 👈 same route as App.jsx
+              onClick={() =>
+                navigate(`/product-details/${item._id}`)
+              }
             >
               <div className="sim-img-box">
                 <img src={img} alt={item.name} />
-                {d > 0 && <span className="sim-discount">{d}% OFF</span>}
+                {d > 0 && (
+                  <span className="sim-discount">{d}% OFF</span>
+                )}
               </div>
 
               <div className="sim-info">
                 <p className="sim-name">{item.name}</p>
-
                 <div className="sim-price-row">
                   <span className="sim-final">₹{final}</span>
                   {d > 0 && <span className="sim-cut">₹{p}</span>}
                 </div>
-
-                <button
-                  className="sim-add-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    addToCart({
-                      id: item._id,
-                      name: item.name,
-                      price: final,
-                      quantity: 1,
-                      image: img,
-                      discount: d,
-                    });
-                    navigate("/cart");
-                  }}
-                >
-                  ADD TO CART
-                </button>
               </div>
             </div>
           );

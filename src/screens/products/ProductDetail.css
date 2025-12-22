@@ -93,6 +93,52 @@
   align-items: center;
   margin-bottom: 20px;
 }
+/* ============================
+   VARIANT SELECTOR
+============================ */
+
+.pd-variant-section {
+  margin-bottom: 20px;
+}
+
+.pd-variant-label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+/* Variant buttons container */
+.pd-variants {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Variant button */
+.pd-variant-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.pd-variant-btn:hover {
+  border-color: #f97316;
+  color: #f97316;
+}
+
+/* Active / Selected */
+.pd-variant-btn.active {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #f97316;
+}
 
 .pd-old-price {
   text-decoration: line-through;
