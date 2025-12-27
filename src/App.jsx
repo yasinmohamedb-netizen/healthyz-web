@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -27,6 +26,7 @@ import Explore from "./screens/Explore/ExploreScreen";
 
 // PROFILE
 import Profile from "./screens/Profile/ProfileScreen";
+import ProfileSetupWeb from "./screens/auth/ProfileSetupWeb";
 import Bookings from "./screens/Profile/Bookings";
 import YourConsultations from "./screens/Profile/YourConsultations";
 import OrdersScreen from "./screens/OrdersScreen";
@@ -36,7 +36,7 @@ import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicyPage from "./screens/auth/PrivacyPolicyPage";
 import RefundPolicyPage from "./screens/auth/RefundPolicyPage";
 import ShippingPolicyPage from "./screens/auth/ShippingPolicyPage";
-import HelpSupportPage from "./screens/auth/HelpSupportPage";   // ⭐ NEW
+import HelpSupportPage from "./screens/auth/HelpSupportPage";
 
 // SERVICES
 import HomeCareServicesScreen from "./screens/Services/HomeCareServicesScreen";
@@ -47,6 +47,8 @@ import Yoga from "./screens/Services/Yoga";
 import Pilates from "./screens/Services/Pilates";
 import Zumba from "./screens/Services/Zumba";
 import PersonalTraining from "./screens/Services/PersonalTraining";
+import WellnessPage from "./screens/Services/WellnessPage";
+import SelfTestsPage from "./screens/Services/SelfTestsPage";
 
 // PRODUCT CATEGORIES
 import BabyCareProductsScreen from "./screens/products/BabyCareProductsScreen";
@@ -72,21 +74,18 @@ import ActionPolicy from "./screens/ActionPolicy";
 import AllDepartments from "./screens/Departments/AllDepartments";
 import DepartmentDetails from "./screens/Departments/DepartmentDetails";
 
-import WellnessPage from "./screens/Services/WellnessPage";
-import SelfTestsPage from "./screens/Services/SelfTestsPage";
-
-
 // ===============================
-// AUTH WRAPPER
+// AUTH GUARD
 // ===============================
 function RequireAuth({ user, children }) {
   const location = useLocation();
+
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+
   return children;
 }
-
 
 // ===============================
 // ROUTES
@@ -94,16 +93,28 @@ function RequireAuth({ user, children }) {
 function AppRoutes({ user }) {
   return (
     <Routes>
+      {/* LOGIN */}
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/home" replace /> : <Login />}
+      />
 
-      {/* AUTH */}
-      <Route path="/login" element={<Login />} />
+      {/* PROFILE SETUP (MANDATORY) */}
+      <Route
+        path="/profile-setup"
+        element={
+          <RequireAuth user={user}>
+            <ProfileSetupWeb />
+          </RequireAuth>
+        }
+      />
 
-      {/* STATIC POLICY PAGES */}
+      {/* STATIC PAGES */}
       <Route path="/terms" element={<TermsAndConditions />} />
       <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       <Route path="/refund-policy" element={<RefundPolicyPage />} />
       <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
-      <Route path="/support" element={<HelpSupportPage />} />  {/* ⭐ NEW */}
+      <Route path="/support" element={<HelpSupportPage />} />
 
       {/* HOME */}
       <Route path="/" element={<Home />} />
@@ -112,22 +123,38 @@ function AppRoutes({ user }) {
       {/* EXPLORE */}
       <Route path="/explore" element={<Explore />} />
 
-      {/* PROFILE (AUTH REQUIRED) */}
+      {/* PROFILE */}
       <Route
         path="/profile"
-        element={<RequireAuth user={user}><Profile /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <Profile />
+          </RequireAuth>
+        }
       />
       <Route
         path="/bookings"
-        element={<RequireAuth user={user}><Bookings /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <Bookings />
+          </RequireAuth>
+        }
       />
       <Route
         path="/consultations"
-        element={<RequireAuth user={user}><YourConsultations /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <YourConsultations />
+          </RequireAuth>
+        }
       />
       <Route
         path="/orders"
-        element={<RequireAuth user={user}><OrdersScreen /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <OrdersScreen />
+          </RequireAuth>
+        }
       />
 
       {/* SERVICES */}
@@ -161,31 +188,41 @@ function AppRoutes({ user }) {
       {/* ADDRESS */}
       <Route
         path="/address"
-        element={<RequireAuth user={user}><AddressEditScreen /></RequireAuth>}
-      />
-
-      {/* CONTACT */}
-      <Route path="/contact" element={<ContactUs />} />
-
-      {/* ORDER CANCEL POLICY */}
-      <Route
-        path="/cancel-order"
-        element={<RequireAuth user={user}><ActionPolicy /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <AddressEditScreen />
+          </RequireAuth>
+        }
       />
 
       {/* CHECKOUT */}
       <Route
         path="/checkout"
-        element={<RequireAuth user={user}><CheckoutScreen /></RequireAuth>}
+        element={
+          <RequireAuth user={user}>
+            <CheckoutScreen />
+          </RequireAuth>
+        }
       />
 
-      {/* DEFAULT FALLBACK */}
-      <Route path="*" element={<Home />} />
+      {/* CONTACT */}
+      <Route path="/contact" element={<ContactUs />} />
 
+      {/* CANCEL ORDER */}
+      <Route
+        path="/cancel-order"
+        element={
+          <RequireAuth user={user}>
+            <ActionPolicy />
+          </RequireAuth>
+        }
+      />
+
+      {/* FALLBACK */}
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 }
-
 
 // ===============================
 // MAIN APP
@@ -199,6 +236,7 @@ export default function App() {
       setUser(authUser);
       setLoading(false);
     });
+
     return () => unsub();
   }, []);
 
@@ -214,7 +252,6 @@ export default function App() {
     <UserProvider>
       <CartProvider>
         <Router>
-
           <Header />
 
           <div className="min-h-[70vh] pt-6 px-4">
@@ -222,7 +259,6 @@ export default function App() {
           </div>
 
           <Footer />
-
         </Router>
       </CartProvider>
     </UserProvider>

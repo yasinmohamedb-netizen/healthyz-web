@@ -1,4 +1,3 @@
-// src/screens/auth/Login.jsx
 import React, { useState } from "react";
 import {
   setUpRecaptcha,
@@ -24,6 +23,8 @@ const db = getFirestore();
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // 🔁 Where user should go after login
   const redirectTo = location.state?.from?.pathname || "/home";
 
   const [mobile, setMobile] = useState("");
@@ -31,34 +32,49 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
 
-  /* -----------------------------------------
-     CHECK USER PROFILE
-  ----------------------------------------- */
-  const checkUserProfile = async (uid, phone = "") => {
+  /* =========================================
+     CHECK USER PROFILE (NEW / EXISTING)
+  ========================================= */
+  const checkUserProfile = async (uid, phone = null) => {
     const ref = doc(db, "users", uid);
     const snap = await getDoc(ref);
 
+    // 🆕 NEW USER
     if (!snap.exists()) {
       await setDoc(ref, {
         uid,
         email: "",
-        mobileNo: phone,
+        mobileNo: phone, // can be null (Google login)
         fullName: "",
         dob: "",
         gender: "",
+        profileCompleted: false,
         createdAt: serverTimestamp(),
       });
 
-      navigate("/profile-setup", { replace: true });
+      navigate("/profile-setup", {
+        replace: true,
+        state: { redirectTo },
+      });
       return;
     }
 
+    // 👤 EXISTING USER BUT PROFILE INCOMPLETE
+    if (snap.data()?.profileCompleted === false) {
+      navigate("/profile-setup", {
+        replace: true,
+        state: { redirectTo },
+      });
+      return;
+    }
+
+    // ✅ PROFILE COMPLETE
     navigate(redirectTo, { replace: true });
   };
 
-  /* -----------------------------------------
+  /* =========================================
      SEND OTP
-  ----------------------------------------- */
+  ========================================= */
   const sendOtpHandler = async (e) => {
     e.preventDefault();
 
@@ -69,25 +85,29 @@ export default function Login() {
 
     try {
       setLoading(true);
-      setUpRecaptcha();
-      const phoneNumber = "+91" + mobile;
 
+      // 🔐 Setup invisible reCAPTCHA
+      setUpRecaptcha();
+
+      const phoneNumber = "+91" + mobile;
       const confirmationResult = await sendOTP(phoneNumber);
+
+      // ⚠️ REQUIRED for OTP verification
       window.confirmationResult = confirmationResult;
 
       setOtpSent(true);
-      alert("OTP sent!");
+      alert("OTP sent successfully");
     } catch (err) {
       console.error("SMS NOT SENT:", err);
-      alert("Failed to send OTP");
+      alert("Failed to send OTP. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* -----------------------------------------
+  /* =========================================
      VERIFY OTP
-  ----------------------------------------- */
+  ========================================= */
   const verifyOtpHandler = async (e) => {
     e.preventDefault();
 
@@ -96,11 +116,23 @@ export default function Login() {
       return;
     }
 
+    // ❗ Handles refresh / expired OTP case
+    if (!window.confirmationResult) {
+      alert("OTP session expired. Please resend OTP.");
+      setOtpSent(false);
+      return;
+    }
+
     try {
       setLoading(true);
+
       const result = await window.confirmationResult.confirm(otp);
       const user = result.user;
-      await checkUserProfile(user.uid, user.phoneNumber);
+
+      await checkUserProfile(
+        user.uid,
+        user.phoneNumber ? user.phoneNumber.replace("+91", "") : null
+      );
     } catch (err) {
       console.error("INVALID OTP:", err);
       alert("Incorrect OTP");
@@ -109,21 +141,29 @@ export default function Login() {
     }
   };
 
-  /* -----------------------------------------
+  /* =========================================
      GOOGLE LOGIN
-  ----------------------------------------- */
+  ========================================= */
   const googleLoginHandler = async () => {
     try {
       const result = await signInWithGooglePopup();
       const user = result.user;
 
-      await checkUserProfile(user.uid, user.phoneNumber || "");
+      await checkUserProfile(
+        user.uid,
+        user.phoneNumber
+          ? user.phoneNumber.replace("+91", "")
+          : null
+      );
     } catch (err) {
       console.error("GOOGLE LOGIN ERROR:", err);
       alert("Google login failed");
     }
   };
 
+  /* =========================================
+     UI
+  ========================================= */
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -134,7 +174,7 @@ export default function Login() {
         <h2 className="auth-title">Welcome to Healthyz</h2>
         <p className="auth-subtitle">Login to continue</p>
 
-        {/* MOBILE INPUT FORM */}
+        {/* MOBILE INPUT */}
         {!otpSent && (
           <form onSubmit={sendOtpHandler}>
             <div id="sign-in-button"></div>
@@ -147,13 +187,17 @@ export default function Login() {
               onChange={(e) => setMobile(e.target.value)}
             />
 
-            <button className="auth-btn" type="submit" disabled={loading}>
+            <button
+              className="auth-btn"
+              type="submit"
+              disabled={loading}
+            >
               {loading ? "Sending..." : "Send OTP"}
             </button>
           </form>
         )}
 
-        {/* OTP FORM */}
+        {/* OTP INPUT */}
         {otpSent && (
           <form onSubmit={verifyOtpHandler}>
             <input
@@ -164,7 +208,11 @@ export default function Login() {
               onChange={(e) => setOtp(e.target.value)}
             />
 
-            <button className="auth-btn" type="submit" disabled={loading}>
+            <button
+              className="auth-btn"
+              type="submit"
+              disabled={loading}
+            >
               {loading ? "Verifying..." : "Verify OTP"}
             </button>
           </form>
@@ -172,7 +220,7 @@ export default function Login() {
 
         <div className="divider">OR</div>
 
-        {/* GOOGLE LOGIN BUTTON */}
+        {/* GOOGLE LOGIN */}
         <button className="google-btn" onClick={googleLoginHandler}>
           <img
             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
@@ -182,7 +230,9 @@ export default function Login() {
           <span>Continue with Google</span>
         </button>
 
+        {/* REQUIRED FOR FIREBASE OTP */}
         <div id="recaptcha-container"></div>
+
       </div>
     </div>
   );

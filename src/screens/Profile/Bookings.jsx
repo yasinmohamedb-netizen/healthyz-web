@@ -63,12 +63,30 @@ export default function Bookings() {
 
       {/* EMPTY STATE */}
       {bookings.length === 0 ? (
-        <div className="bk-empty-state">
-          <div className="bk-icon">📅</div>
-          <h2 className="bk-empty-title">No bookings yet</h2>
-          <p className="bk-empty-desc">Your scheduled services will appear here.</p>
-        </div>
-      ) : (
+  <div className="bk-empty-state">
+    <div className="bk-icon">🩺</div>
+
+    <h2 className="bk-empty-title">
+      You don’t have any bookings yet
+    </h2>
+
+    <p className="bk-empty-desc">
+      Once you book services like home care, wellness sessions, or consultations,
+      they’ll show up here so you can track them easily.
+    </p>
+
+    <div className="bk-empty-actions">
+      <a href="/explore" className="bk-primary-btn">
+        Explore Services
+      </a>
+
+      <a href="/home" className="bk-secondary-btn">
+        Go to Home
+      </a>
+    </div>
+  </div>
+) : (
+
         <div className="bk-grid">
           {bookings.map((item, index) => (
             <div key={index} className="bk-card">
@@ -279,6 +297,47 @@ const bookingStyles = `
   word-break: break-word;
   font-weight: 500;
 }
+
+/* ------------ EMPTY STATE ACTIONS ------------ */
+.bk-empty-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bk-primary-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.bk-primary-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.bk-secondary-btn {
+  background: #e2e8f0;
+  color: #1e293b;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.bk-secondary-btn:hover {
+  background: #cbd5f5;
+}
+
 
 /* ------------ RESPONSIVE ------------ */
 @media (max-width: 768px) {

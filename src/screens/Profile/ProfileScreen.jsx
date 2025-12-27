@@ -6,12 +6,15 @@ import {
   FiEdit,
 } from "react-icons/fi";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import { BASE_URL } from "../../context/config";
 import "./ProfileScreen.css";
 
-// Helper components are placed outside the main component
+// ===============================
+// HELPER COMPONENTS
+// ===============================
 function Section({ title, children, rightButtonText, rightButtonLink }) {
   return (
     <div className="profile-section">
@@ -31,38 +34,56 @@ function Section({ title, children, rightButtonText, rightButtonLink }) {
 function InfoRow({ icon, label, value }) {
   return (
     <div className="info-row">
-      <div className="info-left">{icon} {label}</div>
+      <div className="info-left">
+        {icon} {label}
+      </div>
       <div className="info-right">{value || "--"}</div>
     </div>
   );
 }
 
-
+// ===============================
+// MAIN COMPONENT
+// ===============================
 export default function ProfileScreen() {
   const auth = getAuth();
+  const navigate = useNavigate();
+
   const { userData, setUserData } = useContext(UserContext);
+
   const [loading, setLoading] = useState(true);
   const [defaultAddress, setDefaultAddress] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
 
-  // LOAD USER
-  const fetchUser = async () => {
+  // ===============================
+  // LOAD USER FROM BACKEND
+  // ===============================
+  const fetchUser = async (firebaseUid) => {
     try {
-      if (!userData?.firebaseUid) {
-        setLoading(false);
-        return;
-      }
-
       setLoading(true);
+
       const res = await axios.get(
-        `${BASE_URL}/users/firebase/${userData.firebaseUid}`
+        `${BASE_URL}/users/firebase/${firebaseUid}`
       );
+
       const data = res.data;
-      if (data) setUserData(data);
-      const addr =
-        data?.addresses?.find((a) => a.isDefault) ||
-        (data?.addresses?.length > 0 ? { ...data.addresses[0], isDefault: true } : null);
-      setDefaultAddress(addr);
+
+      if (data) {
+        // 🔐 Firebase Auth is source of truth for email & phone
+        setUserData({
+          ...data,
+          email: auth.currentUser?.email || data.email,
+          mobileNo: auth.currentUser?.phoneNumber || data.mobileNo,
+        });
+
+        const addr =
+          data?.addresses?.find((a) => a.isDefault) ||
+          (data?.addresses?.length > 0
+            ? { ...data.addresses[0], isDefault: true }
+            : null);
+
+        setDefaultAddress(addr);
+      }
     } catch (e) {
       console.log("ERROR loading profile:", e);
     } finally {
@@ -70,26 +91,46 @@ export default function ProfileScreen() {
     }
   };
 
+  // ===============================
+  // FETCH ON UID AVAILABLE
+  // ===============================
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (userData?.firebaseUid) {
+      fetchUser(userData.firebaseUid);
+    } else {
+      setLoading(false);
+    }
+  }, [userData?.firebaseUid]);
 
+  // ===============================
+  // UPDATE DEFAULT ADDRESS ON CHANGE
+  // ===============================
   useEffect(() => {
-    if (!userData) return setDefaultAddress(null);
+    if (!userData) {
+      setDefaultAddress(null);
+      return;
+    }
 
     const addr =
       userData.addresses?.find((a) => a.isDefault) ||
-      (userData.addresses?.length > 0 ? { ...userData.addresses[0], isDefault: true } : null);
+      (userData.addresses?.length > 0
+        ? { ...userData.addresses[0], isDefault: true }
+        : null);
+
     setDefaultAddress(addr);
   }, [userData]);
 
+  // ===============================
   // LOGOUT
+  // ===============================
   const handleLogout = async () => {
     await signOut(auth);
-    window.location.href = "/login";
+    navigate("/login", { replace: true });
   };
 
+  // ===============================
   // DELETE ACCOUNT
+  // ===============================
   const handleDelete = async () => {
     if (!window.confirm("Are you sure? This cannot be undone.")) return;
 
@@ -97,10 +138,11 @@ export default function ProfileScreen() {
       await axios.post(`${BASE_URL}/delete-account`, {
         firebaseUid: userData?.firebaseUid,
         fullName: userData?.fullName,
-        email: userData?.email,
-        mobileNo: userData?.mobileNo,
+        email: auth.currentUser?.email || userData?.email,
+        mobileNo: auth.currentUser?.phoneNumber || userData?.mobileNo,
         reason: "Not specified",
       });
+
       if (auth.currentUser) {
         try {
           await deleteUser(auth.currentUser);
@@ -108,15 +150,18 @@ export default function ProfileScreen() {
           console.warn("Could not delete Firebase Auth user:", err.message);
         }
       }
+
       alert("Account deleted.");
-      window.location.href = "/login";
+      navigate("/login", { replace: true });
     } catch (e) {
       alert("Error deleting account. Login again to continue.");
       console.log(e);
     }
   };
 
-  // WHATSAPP
+  // ===============================
+  // WHATSAPP PRESCRIPTION
+  // ===============================
   const sendWhatsApp = () => {
     const num = "916369223136";
     const name = userData?.fullName || "Guest";
@@ -124,10 +169,17 @@ export default function ProfileScreen() {
     const location = defaultAddress
       ? `${defaultAddress.line1}, ${defaultAddress.city}`
       : "No address";
+
     const msg = `Hello, my name is ${name}. I want to send my prescription. Location: ${location}`;
-    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
+
+    window.open(
+      `https://wa.me/${num}?text=${encodeURIComponent(msg)}`
+    );
   };
 
+  // ===============================
+  // STATES
+  // ===============================
   if (loading) {
     return (
       <div className="profile-loader-wrapper">
@@ -137,32 +189,57 @@ export default function ProfileScreen() {
   }
 
   if (!userData) {
-    return <div className="profile-empty"><p>No user data found</p></div>;
+    return (
+      <div className="profile-empty">
+        <p>No user data found</p>
+      </div>
+    );
   }
 
+  const formatDate = (dateValue) => {
+    if (!dateValue) return "--";
+  
+    try {
+      const date = new Date(dateValue);
+      return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    } catch {
+      return dateValue;
+    }
+  };
+  
+  // ===============================
+  // UI
+  // ===============================
   return (
     <div className="profile-container">
 
-      {/* ---------- LEFT SECTION (Image/Quote) ---------- */}
+      {/* LEFT SECTION */}
       <div className="left-section">
         <img
           src="https://productimagestesting.s3.ap-south-1.amazonaws.com/HomecareHome.png"
           alt="Healthcare"
           className="left-image"
         />
-        <h2 className="left-quote">“Caring for you, every step of the way.”</h2>
-      
-        { <div className="profile-section">
+
+        <h2 className="left-quote">
+          “Caring for you, every step of the way.”
+        </h2>
+
+        <div className="profile-section">
           <div className="section-header">
             <h3>Send Your Prescription</h3>
           </div>
           <button className="whatsapp-btn" onClick={sendWhatsApp}>
             WhatsApp
           </button>
-        </div> }
+        </div>
       </div>
 
-      {/* ---------- RIGHT SECTION (Profile details + Partner box) ---------- */}
+      {/* RIGHT SECTION */}
       <div className="right-section">
         <div className="profile-header">
           <div className="profile-avatar">
@@ -170,52 +247,90 @@ export default function ProfileScreen() {
           </div>
           <div>
             <h1 className="profile-name">{userData.fullName}</h1>
-            <p className="profile-email">{userData.email || userData.mobileNo}</p>
+            <p className="profile-email">
+              {auth.currentUser?.email ||
+                userData.email ||
+                userData.mobileNo}
+            </p>
           </div>
         </div>
+
         <Section title="About Me">
-          <InfoRow icon={<FiPhone />} label="Mobile" value={userData.mobileNo} />
-          <InfoRow icon={<FiUser />} label="Gender" value={userData.gender} />
-          <InfoRow icon={<FiCalendar />} label="Birthday" value={userData.dob} />
+          <InfoRow
+            icon={<FiPhone />}
+            label="Mobile"
+            value={userData.mobileNo}
+          />
+          <InfoRow
+            icon={<FiUser />}
+            label="Gender"
+            value={userData.gender}
+          />
+       <InfoRow
+  icon={<FiCalendar />}
+  label="Birthday"
+  value={formatDate(userData.dob)}
+/>
+
         </Section>
-        <Section title="Shipping Address" rightButtonText="Add / Edit" rightButtonLink="/address">
+
+        <Section
+          title="Shipping Address"
+          rightButtonText="Add / Edit"
+          rightButtonLink="/address"
+        >
           {defaultAddress ? (
             <div className="address-box">
               <p>{defaultAddress.line1}</p>
-              <p>{defaultAddress.city}, {defaultAddress.state} {defaultAddress.zipcode}</p>
+              <p>
+                {defaultAddress.city},{" "}
+                {defaultAddress.state}{" "}
+                {defaultAddress.zipcode}
+              </p>
               <p>{defaultAddress.country}</p>
             </div>
           ) : (
             <p className="no-address">No address added</p>
           )}
         </Section>
-        {/* ACTIVITY */}
+
         <Section title="Your Activity">
           <div className="activity-list">
-            <a href="/orders" className="activity-item">Your Orders</a>
-            <a href="/bookings" className="activity-item">Your Bookings</a>
+            <a href="/orders" className="activity-item">
+              Your Orders
+            </a>
+            <a href="/bookings" className="activity-item">
+              Your Bookings
+            </a>
           </div>
         </Section>
-        {/* OPTIONS */}
-        <button className="toggle-btn" onClick={() => setShowOptions(!showOptions)}>
+
+        <button
+          className="toggle-btn"
+          onClick={() => setShowOptions(!showOptions)}
+        >
           {showOptions ? "Hide Account Options" : "Show Account Options"}
         </button>
+
         {showOptions && (
           <div className="options-box">
-            <button className="logout-btn" onClick={handleLogout}>Logout</button>
-            <button className="delete-btn" onClick={handleDelete}>Delete Account</button>
-            {/* <a className="privacy-btn" href="/privacy-policy">Privacy Policy</a> */}
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+            <button className="delete-btn" onClick={handleDelete}>
+              Delete Account
+            </button>
           </div>
         )}
-        
-        {/* --- PARTNER WITH US: MOVED INSIDE RIGHT SECTION --- */}
+
         <div className="partner-box">
           <h3>Partner With Us</h3>
           <p>Grow with Healthyz</p>
-          <a href="/contact" className="partner-btn">Contact Us</a>
+          <a href="/contact" className="partner-btn">
+            Contact Us
+          </a>
         </div>
-
-      </div> {/* End of right-section */}
+      </div>
     </div>
   );
 }
